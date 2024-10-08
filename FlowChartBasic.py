@@ -1,3 +1,4 @@
+
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -6,9 +7,9 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Load the tokenizer and model
 #normal
-#model_name = r"C:\Users\Jackson\.cache\huggingface\hub\models--meta-llama--Llama-3.2-1B\snapshots\221e3535e1ac4840bdf061a12b634139c84e144c"
+#model_name = r"C:\Users\Nick\.cache\huggingface\hub\models--meta-llama--Llama-3.2-1B\snapshots\221e3535e1ac4840bdf061a12b634139c84e144c"
 #instruct
-model_name = r"C:\Users\Jackson\.cache\huggingface\hub\models--meta-llama--Llama-3.2-1B-Instruct\snapshots\e9f8effbab1cbdc515c11ee6e098e3d5a9f51e14"
+model_name = r"C:\Users\Nick\.cache\huggingface\hub\models--meta-llama--Llama-3.2-3B-Instruct\snapshots\392a143b624368100f77a3eafaa4a2468ba50a72"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name).to(device)
 
@@ -24,15 +25,35 @@ def generate_response(prompt):
     with torch.no_grad():
         # Adjust max_length for longer/shorter responses
         output = model.generate(**inputs, max_length=100, num_return_sequences=1
-                                ,eos_token_id=tokenizer.eos_token_id)
-                                #,do_sample=False, temperature=None, top_p=None)
+                                ,eos_token_id=tokenizer.eos_token_id
+                                ,do_sample=False, temperature=None, top_p=None)
     
     # Decode the output tokens to string
     response = tokenizer.decode(output[0], skip_special_tokens=True).strip()
+    print(inputs['input_ids'].device)
+
     return response
+    
+#Method to see if someone answered the question
+def no_response(conversation):
+    prompt = (
+                f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>"
+                f"You will be given a piece of text that contains a question," 
+                f"analyze the text and answer 'True' if" 
+                f"the you are given an answer to the question, answer 'False' if you are not given an answer."
+                f"ONLY return either the word 'True' or the word 'False"
+                f"<|eot_id|><|start_header_id|>user<|end_header_id|>"
+                f"{conversation}\n"
+                "<|eot_id|><|start_header_id|>assistant<|end_header_id|>"
+             )
+    response = generate_response(prompt)
+    split = response.split("assistant")
+    print("There is an answer: \n")
+    print(split[1])
+    return 'False' in split[1]
 
 
-#Method to follow flow chart
+#Method to see if someone is asking a question
 def should_respond(conversation):
     prompt = (
                 f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>"
@@ -43,12 +64,11 @@ def should_respond(conversation):
                 f"{conversation}\n"
                 "<|eot_id|><|start_header_id|>assistant<|end_header_id|>"
              )
-    print(f"prompt : \n{prompt}")
     response = generate_response(prompt)
     split = response.split("assistant")
-    print("Response: \n")
+    print("There is a question: \n")
     print(split[1])
-    return split[1] == 'True'
+    return 'True' in split[1]
 
 
 # f"""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
@@ -68,8 +88,13 @@ if __name__ == "__main__":
     prompt = "Do you know where I can find the restroom?"
     if (should_respond(prompt)):
         print("WOOOOOOOOOOOOOOOOOOO LlaMA GOAT")
+        if (no_response(prompt)):
+            print("we're still goated lets go")
+        else:
+            print("nvm we are ass")
     else:
         print("damn we ass")
 
+    print("Device: " + "\n" + str(next(model.parameters()).device))
 
 
