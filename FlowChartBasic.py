@@ -35,8 +35,41 @@ def generate_response(prompt):
 
     return response
     
-#Method to see if someone answered the question
-def no_response(conversation):
+
+# Method to see if someone is asking a question, and if so what is it
+def is_there_question(conversation):
+    prompt = (
+                f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>"
+                f"You will be given a piece of text, analyze the text and answer 'True' if" 
+                f"the text contains a question, answer 'False' if it does not."
+                f"ONLY return either the word 'True' or the word 'False"
+                f"<|eot_id|><|start_header_id|>user<|end_header_id|>"
+                f"{conversation}\n"
+                "<|eot_id|><|start_header_id|>assistant<|end_header_id|>"
+             )
+    response = generate_response(prompt)
+    split = response.split("assistant")    
+
+    question = []
+    question.append(split[1])
+    if (question[0]):
+        prompt = (
+                f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>"
+                f"You will be given a piece of text with a question, analyze the text" 
+                f"ONLY extract the question of of the text, returning ONLY the question"
+                f"<|eot_id|><|start_header_id|>user<|end_header_id|>"
+                f"{conversation}\n"
+                "<|eot_id|><|start_header_id|>assistant<|end_header_id|>"
+             )
+        response = generate_response(prompt)
+        split = response.split("assistant")
+        print("Question: " + split[1] + "\n")
+        question.append(split[1])
+    
+    return question
+
+# Method to see if someone answered the question, and if so what is it
+def is_there_answer(conversation):
     prompt = (
                 f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>"
                 f"You will be given a piece of text that contains a question," 
@@ -51,44 +84,25 @@ def no_response(conversation):
     split = response.split("assistant")
     print("There is an answer: \n")
     print(split[1])
-    return 'False' in split[1]
 
-
-#Method to see if someone is asking a question
-def should_respond(conversation):
-    prompt = (
+        
+    answer = []
+    answer.append(split[1])
+    if (answer[0]):
+        prompt = (
                 f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>"
-                f"You will be given a piece of text, analyze the text and answer 'True' if" 
-                f"the text contains a question, answer 'False' if it does not."
-                f"ONLY return either the word 'True' or the word 'False"
+                f"You will be given a piece of text with a question and answer, analyze the text" 
+                f"ONLY extract the exact answer of of the text, returning ONLY the answer"
                 f"<|eot_id|><|start_header_id|>user<|end_header_id|>"
                 f"{conversation}\n"
                 "<|eot_id|><|start_header_id|>assistant<|end_header_id|>"
              )
-    response = generate_response(prompt)
-    split = response.split("assistant")
-    print("There is a question: \n")
-    print(split[1])
-    return 'True' in split[1]
-
-
-#Extract the answer
-def what_is_answer(conversation):
-    prompt = (
-                f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>"
-                f"You will be given a piece of text that has both a question and the answer to that question." 
-                f"Analyze the text and return both the question and answer"
-                f"Format your response with the following:"
-                f"<Insert Question> | <Insert Answer>"
-                f"<|eot_id|><|start_header_id|>user<|end_header_id|>"
-                f"{conversation}\n"
-                "<|eot_id|><|start_header_id|>assistant<|end_header_id|>"
-             )
-    response = generate_response(prompt)
-    split = response.split("assistant")
-    Question_Answer = split[1].split("|")
-    print("Question: "+ Question_Answer[0] + "\n Answer: " + Question_Answer[1] + "\n")
-    return Question_Answer
+        response = generate_response(prompt)
+        split = response.split("assistant")
+        print("answer: " + split[1] + "\n")
+        answer.append(split[1])
+        
+    return answer
 
 
 # compare the answer w/ Dobby's
@@ -133,16 +147,17 @@ def dobby_answer(question):
 # Main
 if __name__ == "__main__":
     prompt = "Do you know where I can find the restroom?"
-    if (should_respond(prompt)): # do we hear a question
-        print("WOOOOOOOOOOOOOOOOOOO LlaMA GOAT")
-        QA = what_is_answer(prompt)
-        dobby_knows = dobby_answer(QA[0])
-        if (dobby_knows): # does dobby know the answer to the question
-            if (no_response(prompt)): # did we hear an answer to the question
+    question = is_there_question(prompt)
+    if (question[0]): # do we hear a question
+        print(question[1])
+        answer = is_there_answer(prompt)
+        dobby_knows = dobby_answer(question[1])
+        if (dobby_knows[0]): # does dobby know the answer to the question
+            if (answer[0]): # did we hear an answer to the question
                 print("we're still goated lets go")
                 # start convo
             else: # we heard an answer, let's compare
-                if compare_answers(QA[0],QA[1],dobby_knows[1]): # we don't need to barge in, they alr know answer
+                if compare_answers(question[1],answer[1],dobby_knows[1]): # we don't need to barge in, they alr know answer
                     print("answers the same")
                     # give up, no need to do anything else
                 else: # we have a different answer
