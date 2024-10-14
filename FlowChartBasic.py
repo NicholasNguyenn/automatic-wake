@@ -109,11 +109,13 @@ def compare_answers(answer1, answer2, question):
     return 'True' in split[1]
 
 # primitive dob 
-def get_dobby_answer(question):
+def dobby_answer(question):
     # figure out how to get dobby answer
     # two options: start convo and stop one (slow)?
-    #
-    return '??' 
+    # idk look in memory idk how dobby works yet
+    
+    dobbyAnswer = ['True',"upstairs or smthn"]
+    return dobbyAnswer 
 
 
 # f"""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
@@ -131,20 +133,21 @@ def get_dobby_answer(question):
 # Main
 if __name__ == "__main__":
     prompt = "Do you know where I can find the restroom?"
-    if (should_respond(prompt)):
+    if (should_respond(prompt)): # do we hear a question
         print("WOOOOOOOOOOOOOOOOOOO LlaMA GOAT")
-        if (no_response(prompt)):
-            print("we're still goated lets go")
-            # start convo
-        else:
-            QA = what_is_answer(prompt)
-            dobbyAnswer = get_dobby_answer(QA[0])
-            if compare_answers(QA[0],QA[1],dobbyAnswer):
-                print("answers the same")
-                # give up, no need to do anything else
-            else:
-                print("diff answers")
+        QA = what_is_answer(prompt)
+        dobby_knows = dobby_answer(QA[0])
+        if (dobby_knows): # does dobby know the answer to the question
+            if (no_response(prompt)): # did we hear an answer to the question
+                print("we're still goated lets go")
                 # start convo
+            else: # we heard an answer, let's compare
+                if compare_answers(QA[0],QA[1],dobby_knows[1]): # we don't need to barge in, they alr know answer
+                    print("answers the same")
+                    # give up, no need to do anything else
+                else: # we have a different answer
+                    print("diff answers")
+                    # start convo
     else:
         print("damn we ass")
 
