@@ -1,5 +1,6 @@
 
 import torch
+import time
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # Check if GPU is available
@@ -71,6 +72,50 @@ def should_respond(conversation):
     return 'True' in split[1]
 
 
+#Extract the answer
+def what_is_answer(conversation):
+    prompt = (
+                f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>"
+                f"You will be given a piece of text that has both a question and the answer to that question." 
+                f"Analyze the text and return both the question and answer"
+                f"Format your response with the following:"
+                f"<Insert Question> | <Insert Answer>"
+                f"<|eot_id|><|start_header_id|>user<|end_header_id|>"
+                f"{conversation}\n"
+                "<|eot_id|><|start_header_id|>assistant<|end_header_id|>"
+             )
+    response = generate_response(prompt)
+    split = response.split("assistant")
+    Question_Answer = split[1].split("|")
+    print("Question: "+ Question_Answer[0] + "\n Answer: " + Question_Answer[1] + "\n")
+    return Question_Answer
+
+
+# compare the answer w/ Dobby's
+def compare_answers(answer1, answer2, question):
+    prompt = (
+                f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>"
+                f"You will be given a question and two answers to that question" 
+                f"Analyze the answers, and determine if they are MEANINGFULLY identical to the question"
+                f"If they are MEANINGFULLY identical, ONLY return true"
+                f"otherwise, ONLY return false"
+                f"<|eot_id|><|start_header_id|>user<|end_header_id|>"
+                f"Question: {question} Answer 1: {answer1}, Answer 2: {answer2}\n"
+                "<|eot_id|><|start_header_id|>assistant<|end_header_id|>"
+             )
+    response = generate_response(prompt)
+    split = response.split("assistant")
+    print(split[1])
+    return 'True' in split[1]
+
+# primitive dob 
+def get_dobby_answer(question):
+    # figure out how to get dobby answer
+    # two options: start convo and stop one (slow)?
+    #
+    return '??' 
+
+
 # f"""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 # You are a helpful assistant who answers True or False questions
 # You will be given a piece of text and you will analyze the text 
@@ -90,8 +135,16 @@ if __name__ == "__main__":
         print("WOOOOOOOOOOOOOOOOOOO LlaMA GOAT")
         if (no_response(prompt)):
             print("we're still goated lets go")
+            # start convo
         else:
-            print("nvm we are ass")
+            QA = what_is_answer(prompt)
+            dobbyAnswer = get_dobby_answer(QA[0])
+            if compare_answers(QA[0],QA[1],dobbyAnswer):
+                print("answers the same")
+                # give up, no need to do anything else
+            else:
+                print("diff answers")
+                # start convo
     else:
         print("damn we ass")
 
