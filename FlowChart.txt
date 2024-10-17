@@ -1,0 +1,23 @@
+@startuml
+:Dobby hears something in the AHG;
+
+if (Does what he hears include the word 'Dobby'?) then (Yes)
+  :start_conversation()	;
+  detach
+else (No)
+  if (Does what he hear have 'questioning-intent'?) then (Yes)
+    if (Does Dobby know the answer to the question?) then (Yes)
+      if (Does Dobby hear an answer within 'x' seconds?) then (Yes)
+        if (Does Dobby's answer align with that answer?) then (Yes)
+          :do nothing;
+          detach
+        endif
+      endif
+      :enter conversation mode with question as prompt;
+      detach
+    endif
+  endif
+  : do nothing;
+  detach
+endif
+@enduml
