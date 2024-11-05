@@ -1,62 +1,136 @@
-#this is what chatGPT gave me. Let's compare this to DobbyLib
-# and seperate into methods
-
 import pyaudio
 import wave
-import pocketsphinx as ps
+import re
+from pyannote.audio import Pipeline
+from pydub import AudioSegment
+import whisper
 
-# Set audio recording parameters
-FORMAT = pyaudio.paInt16  # 16-bit resolution
-CHANNELS = 1              # 1 channel (mono)
-RATE = 16000              # 16kHz sampling rate
-CHUNK = 1024              # 1024 samples per frame
-RECORD_SECONDS = 5        # Record for 5 seconds
-WAVE_OUTPUT_FILENAME = "recorded_audio.wav"
+class Recorder:
+    # Set audio recording parameters
+    FORMAT = pyaudio.paInt16  # 16-bit resolution
+    CHANNELS = 1              # 1 channel (mono)
+    RATE = 16000              # 16kHz sampling rate
+    CHUNK = 512              # 1024 samples per frame
+    RECORD_SECONDS = 5        # Record for 5 seconds
+    WAVE_OUTPUT_FILENAME = "recorded_audio.wav"
 
-# Initialize PyAudio
-audio = pyaudio.PyAudio()
+    def init(self):
+        self.audio = pyaudio.PyAudio()
+        self.frames = []
+    
+    def record_audio(self):
+        stream = self.audio.open(format= self.FORMAT, channels= self.CHANNELS,
+                    rate= self.RATE, input=True,
+                    frames_per_buffer= self.CHUNK)
+        
+        for _ in range(int(self.RATE / self.CHUNK * self.RECORD_SECONDS)):
+            data = stream.read(CHUNK)
+            self.frames.append(data)
 
-# Start recording
-stream = audio.open(format=FORMAT, channels=CHANNELS,
-                    rate=RATE, input=True,
-                    frames_per_buffer=CHUNK)
+        print("Finished recording.")
 
-print("Recording...")
-frames = []
+        # Stop and close the stream
+        stream.stop_stream()
+        stream.close()
+        self.audio.terminate()
 
-for _ in range(int(RATE / CHUNK * RECORD_SECONDS)):
-    data = stream.read(CHUNK)
-    frames.append(data)
+        # Save the recorded data as a WAV file
+        wf = wave.open(self.WAVE_OUTPUT_FILENAME, 'wb')
+        wf.setnchannels(self.CHANNELS)
+        wf.setsampwidth(self.audio.get_sample_size(self.FORMAT))
+        wf.setframerate(self.RATE)
+        wf.writeframes(b''.join(self.frames))
+        wf.close()
 
-print("Finished recording.")
+        
+        
+        
 
-# Stop and close the stream
-stream.stop_stream()
-stream.close()
-audio.terminate()
 
-# Save the recorded data as a WAV file
-wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
-wf.setnchannels(CHANNELS)
-wf.setsampwidth(audio.get_sample_size(FORMAT))
-wf.setframerate(RATE)
-wf.writeframes(b''.join(frames))
-wf.close()
 
-# Speech-to-text using PocketSphinx
-# Initialize the PocketSphinx decoder
-decoder = ps.Decoder()
+# Step 1: Load and Run Speaker Diarization with Pyannote
+def run_diarization(audio_file):
+    # Load the pre-trained diarization model
+    pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization")
+    
+    # Run diarization on your audio file
+    diarization = pipeline(audio_file)
+    
+    # Save diarization result to RTTM format
+    with open("diarization.rttm", "w") as rttm:
+        diarization.write_rttm(rttm)
+    
+    print("Diarization complete, saved to diarization.rttm.")
+    return "diarization.rttm"
 
-# Open the recorded audio file
-with open(WAVE_OUTPUT_FILENAME, 'rb') as audio_file:
-    decoder.start_utt()
-    while True:
-        buf = audio_file.read(1024)
-        if not buf:
-            break
-        decoder.process_raw(buf, False, False)
-    decoder.end_utt()
+# Step 2: Parse RTTM File to Extract Speaker Segments
+def parse_rttm(rttm_file):
+    diarization_segments = []
+    with open(rttm_file, "r") as rttm:
+        for line in rttm:
+            parts = line.strip().split()
+            speaker = parts[7]
+            start_time = float(parts[3]) * 1000  # Convert to milliseconds
+            duration = float(parts[4]) * 1000    # Convert to milliseconds
+            diarization_segments.append((speaker, start_time, duration))
+    return diarization_segments
 
-# Print the decoded text
-print("Speech-to-text result:")
-print(decoder.hyp().hypstr)
+# Step 3: Transcribe Each Segment with Whisper
+def transcribe_segments(audio_file, diarization_segments):
+    # Load the audio file with pydub
+    audio = AudioSegment.from_wav(audio_file)
+    
+    # Load the Whisper model
+    model = whisper.load_model("base")
+    
+    # Dictionary to hold speaker transcriptions
+    speaker_transcriptions = {}
+
+    for speaker, start, duration in diarization_segments:
+        # Extract segment audio
+        segment_audio = audio[start:start + duration]
+        segment_file = "temp_segment.wav"
+        segment_audio.export(segment_file, format="wav")
+        
+        # Transcribe the audio segment with Whisper
+        result = model.transcribe(segment_file)
+        text = result["text"]
+        
+        # Append transcription with speaker label
+        if speaker not in speaker_transcriptions:
+            speaker_transcriptions[speaker] = []
+        speaker_transcriptions[speaker].append(text)
+        
+        print(f"Transcribed segment for {speaker}: {text}")
+    
+    return speaker_transcriptions
+
+# Step 4: Print or Save the Speaker-Labeled Transcriptions
+def print_transcriptions(speaker_transcriptions):
+    for speaker, texts in speaker_transcriptions.items():
+        print(f"\nSpeaker {speaker}:")
+        for text in texts:
+            print(f"  {text}")
+
+# Main function to run all steps
+def main():
+    #record audio
+    recorder = Recorder()
+    recorder.record_audio()
+
+    # Run diarization
+    rttm_file = run_diarization(recorder.WAVE_OUTPUT_FILENAME)
+    
+    # Parse RTTM for speaker segments
+    diarization_segments = parse_rttm(rttm_file)
+    
+    # Transcribe segments and label with speaker
+    speaker_transcriptions = transcribe_segments(recorder.WAVE_OUTPUT_FILENAME, 
+                                                 diarization_segments)
+    
+    # Print speaker-labeled transcriptions
+    print_transcriptions(speaker_transcriptions)
+
+# Run the script
+if __name__ == "__main__":
+    main()
