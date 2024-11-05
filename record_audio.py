@@ -11,10 +11,11 @@ class Recorder:
     CHANNELS = 1              # 1 channel (mono)
     RATE = 16000              # 16kHz sampling rate
     CHUNK = 512              # 1024 samples per frame
-    RECORD_SECONDS = 5        # Record for 5 seconds
+    RECORD_SECONDS = 10        # Record for 5 seconds
     WAVE_OUTPUT_FILENAME = "recorded_audio.wav"
 
-    def init(self):
+    def __init__(self):
+        print("making recorder")
         self.audio = pyaudio.PyAudio()
         self.frames = []
     
@@ -22,9 +23,10 @@ class Recorder:
         stream = self.audio.open(format= self.FORMAT, channels= self.CHANNELS,
                     rate= self.RATE, input=True,
                     frames_per_buffer= self.CHUNK)
+        print("start recording")
         
         for _ in range(int(self.RATE / self.CHUNK * self.RECORD_SECONDS)):
-            data = stream.read(CHUNK)
+            data = stream.read(self.CHUNK)
             self.frames.append(data)
 
         print("Finished recording.")
@@ -51,7 +53,9 @@ class Recorder:
 # Step 1: Load and Run Speaker Diarization with Pyannote
 def run_diarization(audio_file):
     # Load the pre-trained diarization model
-    pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization")
+    pipeline = Pipeline.from_pretrained(
+        "Revai/reverb-diarization-v2",
+        use_auth_token="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")
     
     # Run diarization on your audio file
     diarization = pipeline(audio_file)
@@ -81,7 +85,7 @@ def transcribe_segments(audio_file, diarization_segments):
     audio = AudioSegment.from_wav(audio_file)
     
     # Load the Whisper model
-    model = whisper.load_model("base")
+    model = whisper.load_model("small")
     
     # Dictionary to hold speaker transcriptions
     speaker_transcriptions = {}
