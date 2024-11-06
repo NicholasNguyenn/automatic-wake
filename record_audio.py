@@ -14,7 +14,8 @@ class Recorder:
     RECORD_SECONDS = 5        # Record for 5 seconds
     WAVE_OUTPUT_FILENAME = "recorded_audio.wav"
 
-    def init(self):
+    def __init__(self):
+        print("making recorder")
         self.audio = pyaudio.PyAudio()
         self.frames = []
     
@@ -22,8 +23,10 @@ class Recorder:
         stream = self.audio.open(format= self.FORMAT, channels= self.CHANNELS,
                     rate= self.RATE, input=True,
                     frames_per_buffer= self.CHUNK)
+        print("start recording")
         
         for _ in range(int(self.RATE / self.CHUNK * self.RECORD_SECONDS)):
+            data = stream.read(self.CHUNK)
             data = stream.read(self.CHUNK)
             self.frames.append(data)
 
@@ -46,7 +49,10 @@ class Recorder:
     def run_diarization(self, audio_file):
         # Load the pre-trained diarization model
         pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization")
-        
+        # pipeline = Pipeline.from_pretrained(
+        # "Revai/reverb-diarization-v2",
+        # use_auth_token="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")
+    
         # Run diarization on your audio file
         diarization = pipeline(audio_file)
         
@@ -78,7 +84,7 @@ class Recorder:
         audio = AudioSegment.from_wav(audio_file)
         
         # Load the Whisper model
-        model = whisper.load_model("base")
+        model = whisper.load_model("small")
         
         # List to hold transcription for each turn of speaking
         turn_transcriptions = []
