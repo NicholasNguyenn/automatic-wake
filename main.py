@@ -9,18 +9,18 @@ def main():
     recorder.record_audio()
 
     # Run diarization on the recorded audio
-    rttm_file = rec.run_diarization(recorder.WAVE_OUTPUT_FILENAME)
+    rttm_file = recorder.run_diarization(recorder.WAVE_OUTPUT_FILENAME)
     
     # Parse RTTM for speaker segments
-    diarization_segments = rec.parse_rttm(rttm_file)
+    diarization_segments = recorder.parse_rttm(rttm_file)
     
     # Transcribe audio into turn based conversation given the diarization segments
-    speaker_transcriptions = rec.transcribe_segments(recorder.WAVE_OUTPUT_FILENAME, 
+    speaker_transcriptions = recorder.transcribe_segments(recorder.WAVE_OUTPUT_FILENAME, 
                                                  diarization_segments)
     
     # Decide if we should respond given the conversation we've heard
     model = llama.Model()
-    action = model.appropriate_action()
+    action = model.appropriate_action(speaker_transcriptions)
     print("action decided by model: ")
     print (action)
 
