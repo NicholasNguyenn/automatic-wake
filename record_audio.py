@@ -48,10 +48,11 @@ class Recorder:
     #Load and run speaker diarization with Pyannote on audio_file
     def run_diarization(self, audio_file):
         # Load the pre-trained diarization model
-        pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization")
-        # pipeline = Pipeline.from_pretrained(
-        # "Revai/reverb-diarization-v2",
-        # use_auth_token="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")
+        # pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization")
+        
+        pipeline = Pipeline.from_pretrained(
+        "pyannote/speaker-diarization-3.1",
+        use_auth_token="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")
     
         # Run diarization on your audio file
         diarization = pipeline(audio_file)

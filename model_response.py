@@ -16,7 +16,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
     # model = AutoModelForCausalLM.from_pretrained(model_name).to(device)
 
 class Model:
-    model_name = "/home/bwilab/.cache/huggingface/hub/models--meta-llama--Llama-3.2-3B/snapshots/392a143b624368100f77a3eafaa4a2468ba50a72"
+    model_name = r"C:\Users\Nick\.cache\huggingface\hub\models--meta-llama--Llama-3.2-3B-Instruct\snapshots\392a143b624368100f77a3eafaa4a2468ba50a72"
     function_definitions = """[
         {
             "name": "get_robot_response",
@@ -55,15 +55,19 @@ class Model:
     invoke.\n\n{functions}\n""".format(functions=function_definitions)
 
     def __init__(self):
-        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        model_name = "/home/bwilab/.cache/huggingface/hub/models--meta-llama--Llama-3.2-3B/snapshots/392a143b624368100f77a3eafaa4a2468ba50a72"
-        tokenizer = AutoTokenizer.from_pretrained(model_name)
-        model = AutoModelForCausalLM.from_pretrained(model_name).to(device)
+        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.model_name = r"C:\Users\Nick\.cache\huggingface\hub\models--meta-llama--Llama-3.2-3B-Instruct\snapshots\392a143b624368100f77a3eafaa4a2468ba50a72"
+        self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
+        self.model = AutoModelForCausalLM.from_pretrained(self.model_name).to(self.device)
 
 
     # get response from Llama given the transcription of the conversation
     # heard by Dobby
     def appropriate_action(self, conversation):
+
+        print("Current device: ", torch.cuda.current_device())
+        print("GPU name: ", torch.cuda.get_device_name(torch.cuda.current_device()))
+        
         #create prompt
         prompt = (
             f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>"
@@ -82,7 +86,7 @@ class Model:
         # Generate output using the model
         with torch.no_grad():
             # Adjust max_length for longer/shorter responses
-            output = self.model.generate(**inputs, max_length=200, num_return_sequences=1
+            output = self.model.generate(**inputs, max_length=400, num_return_sequences=1
                                     ,eos_token_id=self.tokenizer.eos_token_id)
         
         # Decode the output tokens to string
