@@ -15,7 +15,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
     # tokenizer = AutoTokenizer.from_pretrained(model_name)
     # model = AutoModelForCausalLM.from_pretrained(model_name).to(device)
 
-class Model:
+class LLModel:
     model_name = r"C:\Users\Nick\.cache\huggingface\hub\models--meta-llama--Llama-3.2-3B-Instruct\snapshots\392a143b624368100f77a3eafaa4a2468ba50a72"
     function_definitions = """[
         {
