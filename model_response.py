@@ -16,47 +16,50 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
     # model = AutoModelForCausalLM.from_pretrained(model_name).to(device)
 
 class LLModel:
-    model_name = r"C:\Users\Nick\.cache\huggingface\hub\models--meta-llama--Llama-3.2-3B-Instruct\snapshots\392a143b624368100f77a3eafaa4a2468ba50a72"
-    function_definitions = """[
+    #model_name = r"C:\Users\Nick\.cache\huggingface\hub\models--meta-llama--Llama-3.2-3B-Instruct\snapshots\392a143b624368100f77a3eafaa4a2468ba50a72"
+    function_definitions = """
+    [
         {
             "name": "get_robot_response",
-            "description": "Get a response from the agent based on the user's input. 
-                            Calling this function would generate a response and 
-                            cause Dobby to speak out loud",
+            "description": "Generate a response from the agent.",
             "parameters": {
-                "user_input": {
-                "type": "string",
-                "description": "The text from the current conversation that the agent 
-                                should respond to. This text is used to prompt the agent.
-                                Should come directly from the user, such as the last few
-                                lines from the current ongoing conversation"
-                },
+                "user_input": "Text from the conversation to prompt the agent."
             }
+        },
+        {
             "name": "do_nothing",
-            "description": "Nothing should be done because there is no indication 
-                            that Dobby is needed",
-            
+            "description": "Do nothing, as Dobby is not needed."
+        },
+        {
             "name": "do_a_dance",
-            "description": "Dance around like you just don't care. Very obnoxious 
-                            but could be fun",
+            "description": "Perform an obnoxious dance."
         }
     ]
     """
-    system_prompt = """You are a converstional robot named Dobby in the robotics 
-    building. You have overheard a conversation going on around you and have a set 
-    of possible functions. Based on the conversation you have heard, you will need
-    to make ONE function call to respond appropriately to the situation.
 
-    When you decide to invoke a function, you MUST put it in the format of 
-    [func_name1(params_name1=params_value1, params_name2=params_value2...)\n
+    system_prompt = """You are a conversational robot named Dobby. 
+    Based on the conversation you overheard, you will call one of the provided functions.
+
+    Choose only one function to invoke. Your response should be formatted like:
+    {{
+        "name": "get_robot_response",
+        "parameters": {{
+            "user_input": "Text from the conversation to prompt the agent."
+        }}
+    }}
     You SHOULD NOT include any other text in the response.
+    Here is a list of functions in JSON format that you can invoke:
 
-    Here is a list of functions in JSON format that you can 
-    invoke.\n\n{functions}\n""".format(functions=function_definitions)
+    {functions}
+    """.format(functions=function_definitions)
+
+
+
 
     def __init__(self):
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        self.model_name = r"C:\Users\Nick\.cache\huggingface\hub\models--meta-llama--Llama-3.2-3B-Instruct\snapshots\392a143b624368100f77a3eafaa4a2468ba50a72"
+        #self.model_name = r"C:\Users\Nick\.cache\huggingface\hub\models--meta-llama--Llama-3.2-3B-Instruct\snapshots\392a143b624368100f77a3eafaa4a2468ba50a72"
+        self.model_name = r"C:\Users\jlars\.cache\huggingface\hub\models--meta-llama--Llama-3.2-3B\snapshots\13afe5124825b4f3751f836b40dafda64c1ed062"
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
         self.model = AutoModelForCausalLM.from_pretrained(self.model_name).to(self.device)
 
@@ -77,6 +80,8 @@ class LLModel:
             f"<|start_header_id|>assistant<|end_header_id|>"
         )
 
+        torch.cuda.empty_cache()
+
         # Encode the input prompt
         inputs = self.tokenizer(prompt, return_tensors="pt")
         
@@ -86,8 +91,9 @@ class LLModel:
         # Generate output using the model
         with torch.no_grad():
             # Adjust max_length for longer/shorter responses
-            output = self.model.generate(**inputs, max_length=400, num_return_sequences=1
-                                    ,eos_token_id=self.tokenizer.eos_token_id)
+            output = self.model.generate(**inputs, max_length=500, num_return_sequences=1
+                                         ,temperature=0.7, top_p=0.9, repetition_penalty=1.2
+                                         ,eos_token_id=self.tokenizer.eos_token_id)
         
         # Decode the output tokens to string
         response = self.tokenizer.decode(output[0], skip_special_tokens=True).strip()

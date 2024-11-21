@@ -1,0 +1,12 @@
+{
+    "type": "service_account",
+    "project_id": "lwr-projects",
+    "private_key_id": "e3d63e614a7c57e1646b746ce82ba7bce62d34d2",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDw3FTxxdo1DV5a\noDBmEO485t71fHXNSHmOhQQDqYqRi2d0DBstG7N3/XTahJho7DUihEVBa+C3l1m2\nji+gyhJMDJKY1y2DNkTtJ14BJ+ScxTK3gxeOfGTXnRtaQsLfkKXW+H8Xf85nTfl7\nGYqlEoQMEtB88mjttug9wkoryEHnyNgAsBwULtmGHSU6AQs1QJmDPQTtBswdTJq6\nA9UT3M3p9DG396Wic3mXga7Rj01MaK+r6EokomKdymCSAOMyRNs/fUoK6KaIUSwz\nkWPmVvS1GwH1P7dJ64ulwCHKY53y8WFLfx3zi6LliXHDJXHQAERRUOeUX4a4cIRv\nvWm8cwTTAgMBAAECggEAVDaVNJtaueXcsY8EnQsaYQzPs8E6ZvYKGjyDtMwYeN7m\n4vpAnjrrOu7RZn2p1DWSNmlM1ZzkSwyN/3gjSvKcBx72Op4xeYkF/G0hPwI1umJw\nYx1gpR71GzYBFEP3YrduZIUp2ouDHTd0HQhHI4QfyyDg6G7RJRwogz9lM32nHWS7\n+F8au+umyRaYJLGwiq56IN9rkC04erkGzq/fRpEqNnRu0NXxhPfSHSTUzvbt6zaZ\nDT7p7lrnT8bjAv46LFoFpYTqAT/K8VlwFbHUJxrpHR8vPVJpGJ6cZO1FigV7Pxyo\nt3lNNQ7c5y9K5As7k9DEkwhKY1fJdT8VrDcePEjosQKBgQD/+6pu+9Buv5hwYUPF\nPlC1dcFXF0CZgrO6BpfIvZSkI21+G8PuVdiqeFgdJMXBRZfoSg8H82wdJIiYGAyn\n4FugaB1TLUKgDndWKXDUxC26ZXVisb7gJn8AAuqq99pWNH9do+mVBcJ/zJbv0yu4\nG60ke3PU6dWDm4oV9tX4mSZORQKBgQDw4Gj2X5k4PxiF+dsLawb8ZJvqy43WdMYK\ngq5pWhkNbLd81G83GWBYD1T8GovG8n+qZzvrGhOB1zaI+ZJOMczJEZNoD5F3Xpvb\n50sPVdTxMyeNBmUsXu4y46LqdnGJS7rtEBxxX7JeWrRpXa9pf6H5NEJSazxEWNgZ\nNrvA6gSkNwKBgQCF+TVOOMTx8Zza1E0f4mljT2oNJsJMlbdy2Rh/m5k7/r7DjcyR\n5KQtNCcJucE2UjIbBQew5Znj9sb2sz+MbUQHQ/Z1He8MzgVvNukysiossAUrzlNU\nBVHas6wWJvpCu98dJziNIiKVuIIWqrLq/LE1stcAzBFPfAxdSn7aSW1e8QKBgQCx\nH2MvX6asXIEs60huAfp2F4krQxj+TInf6q5Tm8P2Qi4+pXtOWeOlfUixxNdpqKHF\n7Pl7bIZRoK5iVJqH00jRxZHOIDyIOVKEhnSER0o5PrNjmQNGeFvRoeAHZqcgHUbL\n0WAI4iSoCyzEmfZFrmutcwcd0erUGzx0dfHj7nERSwKBgQDJ7InnloRScXty1aHr\n1QoXH01RnFM497oggevLLMkS7JJMa+ig79k2K+5CeUvtuWPEcs8X1RMIBmDkD27Q\n3af44gKa0Fuz+x/R7to71EjxNFNbIF/P/jxu5yZ79g58+9jZT7LqrdJz0170xkkT\n6bQHWIqXPi9WqyDb7fsS0YjKIg==\n-----END PRIVATE KEY-----\n",
+    "client_email": "lwr-service-account@lwr-projects.iam.gserviceaccount.com",
+    "client_id": "109623600407798663279",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/lwr-service-account%40lwr-projects.iam.gserviceaccount.com"
+}

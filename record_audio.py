@@ -22,6 +22,7 @@ class Recorder:
     def record_audio(self):
         stream = self.audio.open(format= self.FORMAT, channels= self.CHANNELS,
                     rate= self.RATE, input=True,
+                    input_device_index=1, #probably changes per device
                     frames_per_buffer= self.CHUNK)
         print("start recording")
         
@@ -85,7 +86,7 @@ class Recorder:
         audio = AudioSegment.from_wav(audio_file)
         
         # Load the Whisper model
-        model = whisper.load_model("small")
+        model = whisper.load_model("base")
         
         # List to hold transcription for each turn of speaking
         turn_transcriptions = []

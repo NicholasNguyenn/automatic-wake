@@ -1,0 +1,61 @@
+[
+    {
+        "name": "end_conversation",
+        "description": "Call this immediately if the user would like to end the conversation or if the conversation comes to a conclusion.A goodbye message will be output to the user after calling this function.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "goodbye_message": {
+                    "type": "string",
+                    "description": "A goodbye message for the user"
+                }
+            },
+            "required": []
+        }
+    },
+    {
+        "name": "start_actions",
+        "description": "Immediately begin executing the provided action plan.You should briefly confirm the general plan with the user and ask any clarifying questions before calling this function.If the robot is not capable of meeting the user's request, explain this to the user and do not call this function.Call this function before providing any additional information to the user, which can be discussed after you start the actions.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "action_sequence": {
+                    "type": "array",
+                    "description": "An ordered sequence of actions that will satisfy the user's request.Only include actions that the robot can do, which are specified in the list above.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": ["action_sequence"]
+        }
+    },
+    {
+        "name": "continue_plan",
+        "description": "Move on to the next step in the planned sequence.You should only call this when a plan with multiple steps is currently in progress and when you have completed the current action.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "blank": {
+                    "type": "string",
+                    "description": "not required"
+                }
+            },
+            "required": []
+        }
+    },
+    {
+        "name": "cancel_actions",
+        "description": "Immediately cancel the plan that the robot is currently executing.You should only call this if a plan is being executed and the user would like to alter or cancel it.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "description": "Cancels the action"
+                }
+            },
+            "required": []
+        }
+    }
+]
