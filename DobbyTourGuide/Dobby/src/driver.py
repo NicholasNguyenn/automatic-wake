@@ -37,19 +37,28 @@ def setup():
 
 # called when a conversation is over, begins wandering and looking for new person
 def begin_idling():
-    audio_recorder.start_listening(heard_keyword)
+    audio_recorder.start_listening(enter_conversation)
     face_interface.set_emotion(face_interface.Emotion.IDLE)
     ui.log_console("Listening for Dobby...", True)
 
-
-# event called when keyword detected, starts recording
-def heard_keyword(direction, direction_index):
-    # self.log_console("Detected direction at " + direction, system=True)
+# event called when cognitive model decides we should enter the conversation
+def enter_conversation(transcription):
     face_interface.set_emotion(face_interface.Emotion.NEUTRAL)
     if not is_recording:
+        get_robot_response(transcription)
         audio_recorder.stop_listening()
         sound.play()
         toggle_recording()
+
+
+# # event called when keyword detected, starts recording
+# def heard_keyword(direction, direction_index):
+#     # self.log_console("Detected direction at " + direction, system=True)
+#     face_interface.set_emotion(face_interface.Emotion.NEUTRAL)
+#     if not is_recording:
+#         audio_recorder.stop_listening()
+#         sound.play()
+#         toggle_recording()
 
 
 def toggle_recording(respond=True):

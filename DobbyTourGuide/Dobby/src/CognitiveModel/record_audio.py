@@ -12,7 +12,7 @@ class Recorder:
     CHANNELS = 1              # 1 channel (mono)
     RATE = 16000              # 16kHz sampling rate
     CHUNK = 512              # 512 samples per frame
-    RECORD_SECONDS = 3        # Record for 5 seconds
+    RECORD_SECONDS = 5        # Record for 5 seconds
     WAVE_OUTPUT_FILENAME = "recorded_audio.wav"
 
     def __init__(self):

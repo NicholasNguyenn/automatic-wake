@@ -17,6 +17,7 @@ import face_interface
 import re
 from collections import deque
 import data
+from CognitiveModel.cognitive_model import CognitiveModel
 
 #from elevenlabs import voices, generate, play, stream, save, Voice
 
@@ -63,6 +64,7 @@ class Recorder:
         self.recieving_response = False
         self.enqueue_callback = enqueue_callback
         self.recording = False
+        self.cognitive_model = CognitiveModel()
 
     def calibrate_microphone(self, threshold=2):
         print("Calibrating microphone for 5 chunks... Stay silent")
@@ -184,13 +186,21 @@ class Recorder:
     def start_listening(self, callback):
         self.stop_listening_event = threading.Event()
         self.listen_thread = threading.Thread(
-            target=self.listen_keyword, args=(callback,), daemon=True
+            target=self.wait_turn, args=(callback,), daemon=True
         )
         self.listen_thread.start()
 
     def stop_listening(self):
         # stop listening thread
         self.stop_listening_event.set()
+
+    # Listen to ongoing conversation, cognitive model will return when it is
+    # appropriate for Dobby to interject
+    def wait_turn(self, callback):
+        while not self.stop_listening_event.is_set():
+            action = self.cognitive_model.listen_loop()
+            if action["name"] == 'get_robot_response' and not self.stop_listening_event.is_set():
+                callback(action["parameters"]["user_input"])
 
     # Listens for keyword to begin listening for speech. Default is "Dobby"
     def listen_keyword(self, callback):
