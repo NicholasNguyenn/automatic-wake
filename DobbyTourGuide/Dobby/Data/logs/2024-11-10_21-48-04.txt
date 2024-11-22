@@ -1,0 +1,15 @@
+SYSTEM: You are currently on floor 2. Prefer destinations on this floor.
+SYSTEM: The planned tour destinations are: Mock Apartment
+, Robocup@Home Robot
+, Astro
+, BWI Bots
+, Drone Cage
+, BWIv5 Robot
+, Simulated Hallway
+
+USER: start the tour
+(Happy) Alright, let's get rolling! Our tour begins now. Please make sure you've got all your belongings and a healthy dose of curiosity! (Excited) Our first stop will be the Mock Apartment. Hang tight while we make our way there!
+USER: You need to start the Tour by calling the function.
+(Neutral) Oh, it seems I got a bit too excited to show you around! Let's officially start the tour.
+continue_tour()
+continue_tour: successfully started the tour

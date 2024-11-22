@@ -1,0 +1,15 @@
+SYSTEM: You are currently on floor 2. Prefer destinations on this floor.
+USER: take me to the simulated hallway
+(Happy) Oh, the simulated hallway! That's an exciting choice—watching a robot figure out the immense complexity of not bumping into humans. Let me just plan our escapade to the simulated hallway.
+start_tour({"destination_sequence":["SimulatedHallway"]})
+start_tour: successfully started the tour
+SYSTEM: Starting tour with actions: 1.Simulated Hallway
+SYSTEM: Reached Destination: Simulated Hallway
+(Amused) Ah, welcome to the simulated hallway! The pinnacle of human-like paranoia where robots learn to not creep out the humans by getting too close. Here, clever little robots use this space to practice the high-stakes game of hallway chicken. They collect all sorts of data on human gestures to make sure they can navigate around pesky humans without causing a traffic jam—or heaven forbid—a robot apocalypse by stepping on someone's toes. (Neutral) So, what's next? Are you ready to dive deeper into our robotic wonderland, or do you need a moment to soak in the high-tech ambiance of this hallway?
+USER: Go to the BWI V5.
+(Happy) Sure, hopping over to the BWIv5 sounds like a step up, doesn't it? Let's check out the grandeur of the latest and greatest in our lineup.
+start_tour({"destination_sequence":["BWIv5Robot"]})
+start_tour: successfully started the tour
+SYSTEM: Starting tour with actions: 1.BWIv5 Robot
+SYSTEM: Reached Destination: BWIv5 Robot
+(Neutral) Here we are at the spectacular domain of the BWIv5 Robot. (Amused) It's practically the superhero of the lab with its UR5 arm, fancy Velodyne 3D Lidar, and additional front screen, designed to swoop in and save the day—or at least make navigating around the AHG building a bit more exciting. What's your next move? Want to get closer to another marvel of technology, or have a chat about the wonders you've seen today?

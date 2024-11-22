@@ -1,0 +1,68 @@
+Mock Apartment:
+  x: 0.06827972709551489
+  y: 4.76757689893283
+  yaw: 2.6452489796352983
+  info: This space around us serves as a simulated apartment environment. This space
+    is primarily used by the LWR Lab to model at-home service robot tasks.
+  floor: 2
+  room: 202
+Simulated Hallway:
+  x: 6.25544530092526
+  y: -4.4763642133292585
+  yaw: 1.752994282257837
+  info: One of the current projects in the lab involves how a robot should pass a
+    human in the hallway. This simulated hallway allows researchers here to run experiments
+    to collect data on human gestures. This data is then used to train robot models
+    so robots can navigate around humans in the hallway autonomously.
+  floor: 2
+  room: 202
+Astro:
+  x: -4.3295341041783075
+  y: -5.286695637595429
+  yaw: -3.112186981506027
+  info: Astro is Amazon Robotics' first attempt into commercial at-home robotics.
+    Astro can deliver items, play music, take pictures, and even dance. It uses a
+    similar design to Alexa and listens for the keyword "Astro" to do commands. You
+    can try it out by saying "Astro, do a dance"
+  floor: 2
+  room: 202
+Robocup@Home Robot:
+  x: -2.7358870323675006
+  y: -2.400879399416219
+  yaw: -2.712756123744644
+  info: This is a Toyota Human Support Robot that UT Austin uses in the annual Robocup
+    At Home Domestic Standard Platform League competitions. The competition is a gauntlet
+    of domestic service tasks that the robot must perform one after another. Some
+    examples include serving drinks, being a receptionist, and picking up and placing
+    objects on shelves in a certain order. This competition serves as a springboard
+    for HRI research by pooling together scientists from across the world to participate
+    in lightweight, fun programming challenges.
+  floor: 2
+  room: 202
+BWI Bots:
+  x: 0.4166858586883393
+  y: 13.325721381782671
+  yaw: -3.1405355747924504
+  info: This is a fleet of UT's BWIBots at their charging station.These robots are
+    simple yet powerful agents. They have an Azure Kinect to record color and depth
+    data, a 2D Lidar for localization, and a segway RMP for motion.
+  floor: 2
+  room: 202
+Drone Cage:
+  x: 1.0553542666339553
+  y: 13.352409490117395
+  yaw: 1.6425862143569345
+  info: This is the Autonomous Mobile Robotics Lab, or AMRL for short. Run by Dr.
+    Joydeep Biswas, the AMRL is a large space dedicated to smaller robots focused
+    on navigation and mobility. The cargo net surrounding the space is a safety precaution
+  floor: 2
+  room: 202
+BWIv5 Robot:
+  x: 3.806583976422459
+  y: 13.398235660464827
+  yaw: 1.6260744936473155
+  info: The latest version of UT's BWIBot, this version has a few notable features
+    that sets it apart from earlier editions. It has a UR5 arm, an additional screen
+    on the front, and a Velodyne 3D Lidar.
+  floor: 2
+  room: 202

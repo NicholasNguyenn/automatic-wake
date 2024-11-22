@@ -1,0 +1,28 @@
+ElevatorEntrance:
+  floor: 2
+  x: -3.311252800145744
+  y: -7.957255386530903
+  room: 2
+  visitable: false
+  yaw: -0.025361384913613998
+Exoskeleton Robot:
+  floor: 2
+  x: -59.377970894059395
+  y: 16.58870628963024
+  room: 304
+  visitable: true
+  yaw: 2.308994540686708
+InsideElevator:
+  floor: 2
+  x: -0.3176745575463475
+  y: -8.01364088165176
+  room: 2
+  visitable: false
+  yaw: -3.0345652404759584
+InsideElevatorWall:
+  floor: 2
+  x: 0.36755187153764446
+  y: -8.204747067401389
+  room: 2
+  visitable: false
+  yaw: -0.032052316826641294

@@ -1,0 +1,11 @@
+SYSTEM: You are currently on floor 2. Prefer destinations on this floor.
+SYSTEM: The planned tour destinations are: Mock Apartment
+, Robocup@Home Robot
+, Astro
+, BWI Bots
+, Drone Cage
+, BWIv5 Robot
+, Simulated Hallway
+
+USER: hello
+(Neutral) Hello! Welcome to the Living with Robots Lab! Are you excited to explore some cutting-edge robotics with me today?

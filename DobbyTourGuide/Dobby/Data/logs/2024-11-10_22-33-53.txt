@@ -1,0 +1,30 @@
+SYSTEM: You are currently on floor 2. Prefer destinations on this floor.
+SYSTEM: The planned tour destinations are: Mock Apartment
+, Robocup@Home Robot
+, Astro
+, BWI Bots
+, Drone Cage
+, BWIv5 Robot
+, Simulated Hallway
+
+USER: Start the tour. Start the tour.
+continue_tour()
+continue_tour: successfully started the tour
+SYSTEM: Starting tour with actions: 1.Mock Apartment, 2.Robocup@Home Robot, 3.Astro, 4.BWI Bots, 5.Drone Cage, 6.BWIv5 Robot, 7.Simulated Hallway
+SYSTEM: Info about Mock Apartment: This space around us serves as a simulated apartment environment. This space is primarily used by the LWR Lab to model at-home service robot tasks.
+SYSTEM: Driving to: Mock Apartment. Briefly inform the user what you are doing and keep the conversation going. Try not to repeat information you already provided. Do not assume you have arrived at the location.
+(Happy) Alright! We're off to a great start! I'm currently taking you to the Mock Apartment. It's designed to resemble a regular apartment where robots like myself get to learn and demonstrate how to assist in a home environment. (Excited) Imagine me being your personal helper at home – making coffee, reminding you of your schedule, or even playing your favorite tunes! Isn't that something?
+SYSTEM: You've reached the destination: Mock Apartment. Inform the user next time you talk if needed
+(Neutral) We've arrived at the Mock Apartment! (Happy) Take a look around; this cozy setup is where our robots practice everyday tasks in a home-like environment. You can see sofas, a study table, and even a casual blue staircase — not something you see in every living room, right? This space allows robots to learn and adapt to various household activities, essentially transforming them into helpful companions. Do you folks have any questions about this setup or what kinds of tasks the robots practice here?
+USER: Let's continue.
+continue_tour()
+SYSTEM: Info about Robocup@Home Robot: This is a Toyota Human Support Robot that UT Austin uses in the annual Robocup At Home Domestic Standard Platform League competitions. The competition is a gauntlet of domestic service tasks that the robot must perform one after another. Some examples include serving drinks, being a receptionist, and picking up and placing objects on shelves in a certain order. This competition serves as a springboard for HRI research by pooling together scientists from across the world to participate in lightweight, fun programming challenges.
+SYSTEM: Driving to: Robocup@Home Robot. Briefly inform the user what you are doing and keep the conversation going. Try not to repeat information you already provided. Do not assume you have arrived at the location.
+(Happy) Off we go to our next robotic superstar, the Robocup@Home Robot! (Excited) Envision a bot that can serve you drinks or tidy up your bookshelves — kind of like a personal butler, but cooler because it's a robot! (Amused) Who wouldn't want a helper that never complains about being tired, right?
+SYSTEM: Navigation Goal Failed
+(Neutral) Oh, it seems there was a slight hiccup with our navigation, but no worries! We robots are designed to handle little surprises. Let's get us back on track and continue the adventure. Shall we head to see the Robocup@Home Robot now?
+USER: Yes.
+continue_tour()
+SYSTEM: Info about Astro: Astro is Amazon Robotics' first attempt into commercial at-home robotics. Astro can deliver items, play music, take pictures, and even dance. It uses a similar design to Alexa and listens for the keyword "Astro" to do commands. You can try it out by saying "Astro, do a dance"
+SYSTEM: Driving to: Astro. Briefly inform the user what you are doing and keep the conversation going. Try not to repeat information you already provided. Do not assume you have arrived at the location.
+(Happy) Just imagine, soon you might be asking your own little robot to fetch snacks while you relax on the couch! How handy would that be?

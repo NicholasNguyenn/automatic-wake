@@ -1,0 +1,109 @@
+Astro Robot:
+  floor: 2
+  info: "Astro is Amazon Robotics\u2019 first attempt into commercial at-home robotics.\
+    \ Astro can deliver items, play music, take pictures, and even dance. It uses\
+    \ a similar design to Alexa and listens for the keyword \u201CAstro\u201D to do\
+    \ commands. You can try it out by saying \u201CAstro, do a dance\u201D"
+  pos_x: -2.8576469726289653
+  pos_y: -4.935726073269048
+  rot_w: -0.04250965828060249
+  rot_z: 0.9990960559189825
+  visitable: true
+BWI Bots:
+  floor: 2
+  info: "This is a fleet of UT\u2019s BWIBots at their charging station.These robots\
+    \ are simple yet powerful agents. They have an Azure Kinect to record color and\
+    \ depth data, a 2D Lidar for localization, and a segway RMP for motion."
+  pos_x: 1.0494749084525878
+  pos_y: 13.469281279072725
+  rot_w: -0.13409132246498354
+  rot_z: 0.9909689789491857
+  visitable: true
+BWIV5 Robot:
+  floor: 2
+  info: "The latest version of UT\u2019s BWIBot, this version has a few notable features\
+    \ that sets it apart from earlier editions. It has a UR5 arm, an additional screen\
+    \ on the front, and a Velodyne 3D Lidar."
+  pos_x: 4.112082103216016
+  pos_y: 13.380347363606957
+  rot_w: 0.9233720556596061
+  rot_z: 0.3839062995405952
+  visitable: true
+Boston Dynamics Spot Robot:
+  floor: 2
+  info: Spot was designed to be a versatile robot capable of performing various tasks
+    in a variety of environments. It's equipped with sensors and cameras that allow
+    it to navigate and interact with its surroundings autonomously.
+  pos_x: -3.183375737554412
+  pos_y: -16.808427443505742
+  rot_w: -0.7690303803983204
+  rot_z: 0.6392122292512987
+  visitable: true
+Drone Cage:
+  floor: 2
+  info: This is the  Autonomous Mobile Robotics Lab, or AMRL for short. Run by Dr.
+    Joydeep Biswas, the AMRL is a large space dedicated to smaller robots focused
+    on navigation and mobility. The cargo net surrounding the space is a safety precaution
+    to catch robot drones or runaway ground robots.
+  pos_x: 0.893456551166786
+  pos_y: 13.4763756306657
+  rot_w: -0.7309940383426987
+  rot_z: -0.6823838479239033
+  visitable: true
+Husky and Jackel Autonomous Vehicles:
+  floor: 2
+  info: These two rovers are part of the AMRL lab. They are used to study campus-wide
+    \ navigation and mapping. They use a variety of sensors, including \ a Velodyne
+    3D Lidar, a 2D Lidar, and a GPS to localize themself and build a map of their
+    environment.
+  pos_x: 2.902167915576772
+  pos_y: -17.35647835558074
+  rot_w: -0.7052502466758617
+  rot_z: 0.7089584540462411
+  visitable: true
+Mock Apartment:
+  floor: 2
+  info: This space around us serves as a simulated apartment environment. This space
+    is primarily used by the LWR Lab to model at-home service robot tasks.
+  pos_x: -0.18602569360395904
+  pos_y: 5.153294688670988
+  rot_w: 0.4067785536250513
+  rot_z: 0.9135267967119034
+  visitable: true
+RoboCup@Home Robot:
+  floor: 2
+  info: "This is a Toyota Human Support Robot that UT Austin uses in the annual Robocup\
+    \ At Home \u201CDomestic Standard Platform League\u201D competitions. The competition\
+    \ is a gauntlet of domestic service tasks that the robot must perform one after\
+    \ another. Some examples include serving drinks, being a receptionist, and picking\
+    \ up and placing objects on shelves in a certain order. This competition serves\
+    \ as a springboard for HRI research by pooling together scientists from across\
+    \ the world to participate in lightweight, fun programming challenges."
+  pos_x: -2.5699613841704307
+  pos_y: -2.3712245400188126
+  rot_w: 0.2108128483271674
+  rot_z: 0.9775264410644792
+  visitable: true
+Robot Manipulator:
+  floor: 2
+  info: This robot is being used for a research project involving the manipulation
+    of articulated objects\ \ like doors and drawers. As the robot explores, it can
+    register the location of all the articulated objects in the environment.\ \ The
+    omnidirectional wheels allow the robot to move in any direction, enabling more
+    complex manipulation when utilizing the base and arm together.
+  pos_x: 5.108266394460944
+  pos_y: -14.68322491643069
+  rot_w: 0.9990424641012831
+  rot_z: -0.043751056243666875
+  visitable: true
+Social Navigation Hallway:
+  floor: 2
+  info: One of the current projects in the lab involves how a robot should pass a
+    human in the hallway. This simulated hallway allows researchers here to run experiments
+    to collect data on human gestures. This data is then used to train robot models
+    so robots can navigate around humans in the hallway autonomously.
+  pos_x: 6.630666331093946
+  pos_y: -4.040850741923206
+  rot_w: 0.6753145775092958
+  rot_z: 0.737529810518491
+  visitable: true

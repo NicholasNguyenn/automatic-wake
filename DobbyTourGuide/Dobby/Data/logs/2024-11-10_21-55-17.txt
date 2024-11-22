@@ -1,0 +1,15 @@
+SYSTEM: You are currently on floor 2. Prefer destinations on this floor.
+SYSTEM: The planned tour destinations are: Mock Apartment
+, Robocup@Home Robot
+, Astro
+, BWI Bots
+, Drone Cage
+, BWIv5 Robot
+, Simulated Hallway
+
+USER: start the tour
+continue_tour()
+continue_tour: successfully started the tour
+SYSTEM: Starting tour with actions: 1.Mock Apartment, 2.Robocup@Home Robot, 3.Astro, 4.BWI Bots, 5.Drone Cage, 6.BWIv5 Robot, 7.Simulated Hallway
+SYSTEM: Driving to: Doorway. Briefly inform the user what you are doing and keep the conversation going. Try not to repeat information you already provided. Do not assume you have arrived at the location.
+(Excited) Off we go on our thrilling tour through the Living with Robots lab! I’m Dobby, your delightful, digital docent. Right now, we're heading towards the doorway. (Amused) It’s quite the gateway to discovery, I must say! So, (Happy) has anyone tried crossing a room full of robots without saying “excuse me”? It’s like a mechanical version of “The Floor is Lava”!

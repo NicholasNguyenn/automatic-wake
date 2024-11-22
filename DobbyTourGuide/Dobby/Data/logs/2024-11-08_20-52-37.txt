@@ -1,0 +1,17 @@
+SYSTEM: You are currently on floor 2. Prefer destinations on this floor.
+SYSTEM: The planned tour destinations are: Meeting Point
+, Collaborative Room
+, The Advanced Robotic Technologies
+, Medical Robotics Lab
+, Da Vinci robot
+, Kuka Arm
+, Adaptive Cars
+, Exoskeleton Robot
+, TroCar
+, Mobile Autonomy Lab
+, Boston Dynamics Spot Robot
+, Simulated Hallway
+, Astro Robot
+, Simulated Apartment
+, Drone Cage
+, BWI Bots

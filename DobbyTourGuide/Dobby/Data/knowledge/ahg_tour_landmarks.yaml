@@ -1,0 +1,429 @@
+Adaptive Cars:
+  floor: 2
+  info: Here we see adaptive cars. These are a modern version of the Vulcan 1 wheelchair,
+    but made for kids. An associate professor at Texas Robotics, James Schuler, developed
+    this car for his daughter who was paraplegic. Since moving on to start his own
+    business, ADAPT Texas, an undergraduate organization on campus that provides adaptive
+    toys for kids with disabilities, has taken over to develop these cars further.
+  pos_x: -66.72960388539832
+  pos_y: 16.655773689792447
+  room: 304
+  rot_w: -0.8194396693572045
+  rot_z: 0.5731654458214969
+  visitable: false
+Astro Robot:
+  floor: 2
+  info: "Astro is Amazon Robotics\u2019 first attempt into commercial at-home robotics.\
+    \ Astro can deliver items, play music, take pictures, and even dance. It uses\
+    \ a similar design to Alexa and listens for the keyword \u201CAstro\u201D to do\
+    \ commands. You can try it out by saying \u201CAstro, do a dance\u201D"
+  pos_x: -2.8576469726289653
+  pos_y: -4.935726073269048
+  room: 202
+  rot_w: -0.04250965828060249
+  rot_z: 0.9990960559189825
+  visitable: true
+BWI Bots:
+  floor: 2
+  info: "This is a fleet of UT\u2019s BWIBots at their charging station.These robots\
+    \ are simple yet powerful agents. They have an Azure Kinect to record color and\
+    \ depth data, a 2D Lidar for localization, and a segway RMP for motion."
+  pos_x: 1.0494749084525878
+  pos_y: 13.469281279072725
+  room: 202
+  rot_w: -0.13409132246498354
+  rot_z: 0.9909689789491857
+  visitable: false
+BWIV5 Robot:
+  floor: 2
+  info: "The latest version of UT\u2019s BWIBot, this version has a few notable features\
+    \ that sets it apart from earlier editions. It has a UR5 arm, an additional screen\
+    \ on the front, and a Velodyne 3D Lidar."
+  pos_x: 4.112082103216016
+  pos_y: 13.380347363606957
+  room: 202
+  rot_w: 0.9233720556596061
+  rot_z: 0.3839062995405952
+  visitable: false
+Boston Dynamics Spot Robot:
+  floor: 2
+  info: Spot was designed to be a versatile robot capable of performing various tasks
+    in a variety of environments. It's equipped with sensors and cameras that allow
+    it to navigate and interact with its surroundings autonomously.
+  pos_x: -3.183375737554412
+  pos_y: -16.808427443505742
+  room: 202
+  rot_w: -0.7690303803983204
+  rot_z: 0.6392122292512987
+  visitable: false
+Collaborative Room:
+  floor: 2
+  info: In this room, you can see a few retired robots that were built very early
+    in the history of robotics at the University of Texas, long before Texas Robotics
+    as we know it today,   aka, the 90s.   At this time robotics research was spread
+    across colleges on campus, with no official   coordination between departments.   In
+    the corner we can see the Vulcan I wheelchair robot, originally created at KISS   institute,
+    but purchased and modified at UT Austin in 1995. This was done by Dr.   Kupiers,
+    a roboticist who then worked at UT, after interviewing a paraplegic student   who
+    expressed interest in an electric wheelchair that could prevent collisions.   Dr.
+    Kuipers, along with other roboticists and students at UT modified the robot to   create
+    early autonomous driving and mapping systems that were programmed to be   subordinate
+    to the driver. While Vulcan I lives here today, Dr. Kuipers continues his   work
+    on the Vulcan II at the University of Massachusetts.   We like to say that this
+    robot is a prime example of the three core competencies of   Texas Robotics, as
+    it combines medical robotics, human-robot interaction, and mobile   autonomous
+    robotics.   In the back right corner of the room, there is a retired robot manipulator.
+    Robot   manipulators are grasping robots used to lift, move, and control objects.
+    There is an   entire lab space dedicated to robots like this one in AHG today.
+    This robot was   specifically used for researching manipulating small objects
+    and constructing things   from Legos.   On the other side of the room, you can
+    see more smaller retired robots. They served   also as early mobile autonomous
+    robots around the same time frame as the Vulcan I.   You can view some modern
+    Mobile Autonomous robots on the screens here.
+  pos_x: -38.958259265
+  pos_y: -9.8998684988
+  room: 2
+  rot_w: 0.712388659271
+  rot_z: -0.701785150984
+  visitable: true
+Da Vinci robot:
+  floor: 2
+  info: "The first one we will look at is the Da Vinci robot which is at the left\
+    \ back corner of the lab. The Da Vinci is used to perform surgery  remotely using\
+    \ these small pinchers. We have two Da Vinci robots in AHG, the second being next\
+    \ to us in Dr. Alambeigi\u2019s lab. There are over 30,000 Da Vinci robots worldwide,\
+    \ but many doctors say the experience of using them is not similar to real-life\
+    \ surgery. Dr. Majewicz Fey\u2019s Lab is working on programing and haptics devices\
+    \ that make this robot more lifelike and accurate for surgeries and surgical trainings.\
+    \ Many of the other devices on this side of the lab, are also haptic devices."
+  pos_x: -66.47146085959842
+  pos_y: -10.730451881472003
+  room: 304
+  rot_w: -0.8280734969487232
+  rot_z: 0.5606195533970544
+  visitable: false
+Drone Cage:
+  floor: 2
+  info: This is the  Autonomous Mobile Robotics Lab, or AMRL for short. Run by Dr.
+    Joydeep Biswas, the AMRL is a large space dedicated to smaller robots focused
+    on navigation and mobility. The cargo net surrounding the space is a safety precaution
+    to catch robot drones or runaway ground robots.
+  pos_x: 0.893456551166786
+  pos_y: 13.4763756306657
+  room: 202
+  rot_w: -0.7309940383426987
+  rot_z: -0.6823838479239033
+  visitable: false
+Drone Cage Window:
+  floor: 2
+  info: This is Texas Robotic\u2019s flight cage. It is home to our drones, where
+    we test fly. Researchers here are attempting to program and improve flight patterns
+    and capabilities of drones. This room also houses other robots for testing as
+    it has movement tracking abilities. Researchers use this to test if robots are
+    moving how they are programmed. Texas Aerial Robotics, an undergraduate student
+    org, uses this space to test their drones for competitions and student training.
+  pos_x: -6.44197845459
+  pos_y: 20.2858448029
+  room: 2
+  rot_w: 0.998478617269
+  rot_z: -0.0551402834277
+  visitable: true
+ElevatorEntrance:
+  floor: 2
+  pos_x: -3.311252800145744
+  pos_y: -7.957255386530903
+  room: 2
+  rot_w: -0.9999196010967615
+  rot_z: 0.012680352617063517
+  visitable: false
+Exoskeleton Robot:
+  floor: 2
+  pos_x: -59.377970894059395
+  pos_y: 16.58870628963024
+  room: 304
+  rot_w: 0.4043783776102562
+  rot_z: 0.9145917820105847
+  visitable: true
+InsideElevator:
+  floor: 2
+  pos_x: -0.3176745575463475
+  pos_y: -8.01364088165176
+  room: 2
+  rot_w: -0.053488168863838836
+  rot_z: 0.9985684832757307
+  visitable: false
+InsideElevatorWall:
+  floor: 2
+  pos_x: 0.36755187153764446
+  pos_y: -8.204747067401389
+  room: 2
+  rot_w: -0.9998715838718
+  rot_z: 0.016025472401709734
+  visitable: false
+Kuka Arm:
+  floor: 2
+  info: "This is the Kuka robot, used for 3D printing muscles for Dr. Alambeigi\u2019\
+    \ lab. They hope to develop this technology and its applications to assist in\
+    \ surgical procedures."
+  pos_x: -69.19960633780997
+  pos_y: 3.1726905151217837
+  room: 304
+  rot_w: 0.3805610954599199
+  rot_z: 0.9247557799886117
+  visitable: false
+Medical Robotics Lab:
+  floor: 2
+  info: "Welcome to the Medical Robotics Lab! Let\u2019s explore the exciting projects\
+    \ happening inside.    Inside, multiple robots are advancing medical procedures.\
+    \ The Da Vinci robot performs remote  surgery, with ongoing improvements for better\
+    \ training experiences. Our lab features projects  like a device for training\
+    \ doctors in trocar insertion and a Kuka robot 3D printing muscles for  surgeries.\
+    \  We\u2019ve also developed adaptive cars for kids with disabilities and exoskeleton\
+    \ robots for patient rehabilitation. While we can\u2019t go inside today, I hope\
+    \ this glimpse into our work has piqued your interest!"
+  pos_x: -61.45102855063229
+  pos_y: -11.055584579941776
+  room: 2
+  rot_w: 0.40289294015667987
+  rot_z: 0.9152471135009967
+  visitable: true
+Medical Robotics Lab Window 1:
+  floor: 2
+  info: "Now, let\u2019s delve into some remarkable innovations in medical technology.\
+    \   One such innovation is the trocar insertion device, which aids in training\
+    \ doctors  to perform intricate minimally invasive procedures safely. Additionally,\
+    \ there\u2019s the Kuka robot, utilized for 3D printing muscles for surgical applications.\
+    \ Lastly, we have  adaptive cars, designed particularly for children with disabilities,\
+    \ aiming to enhance their mobility and quality of life. These advancements demonstrate\
+    \ the ongoing evolution of healthcare through technology and empathy."
+  pos_x: -54.3345316541
+  pos_y: 5.95727841269
+  room: 2
+  rot_w: 0.00324144431229
+  rot_z: -0.999994746506
+  visitable: true
+Medical Robotics Lab Window 2:
+  floor: 2
+  info: "In the cubicles with grey curtains, there are special robots called Maestro\
+    \ and Harmony.  They\u2019re like wearable suits, known as exoskeleton robots,\
+    \ that you put on your body.  These robots are made to help people who have had\
+    \ strokes, burns, or traumatic brain injuries to recover. Dr. Deshpande\u2019\
+    s lab, ReNEU, created them. Patients wear these robot suits on their hands or\
+    \ upper bodies. The robots copy their movements to help them get better. Inside\
+    \  these suits, patients play virtual reality games that help them practice everyday\
+    \ tasks. These robot suits were made from scratch at Texas Robotics. Now, they\u2019\
+    re used in hospitals, rehab centers, and physical therapy centers all over the\
+    \ world. They\u2019re helping many people on their journey to recovery."
+  pos_x: -53.9359100526
+  pos_y: 12.4620861728
+  room: 2
+  rot_w: 0.477053045795
+  rot_z: 0.878874502701
+  visitable: true
+Meeting Point:
+  floor: 2
+  info: "Welcome! This is the start of the tour of the Anna Hiss Gymnasium. We are\
+    \ at the second floor. History of The Anna Hiss Gymnasium (AHG): it was built\
+    \ in the 1930s, following the vision of Anna Hiss, the women\u2019s athletic director\
+    \ at the time, who spent 10 years touring gyms across America before designing\
+    \ this one. Complete with a swimming pool, multiple basketball courts, an archery\
+    \ range, and more, it was the premier training facility of its time. This gym\
+    \ was built long before Title IV\u2019s protections of women\u2019s sports, and\
+    \ it was even a common belief that vigorous exercise was harmful to women. Men\u2019\
+    s athletics were valued much higher than women\u2019s and women\u2019s athletics\
+    \ were not meant to be competative. As a response, the facilities in the gym were\
+    \ built too small for code. The pool of the gym was tore out in 1995, and in 2021,\
+    \ AHG was remodeled specifically to the needs of Texas Robotics while keeping\
+    \ as many historical features as possible. The project cost a total of $26.5 million\
+    \ dollars, including costs for rehabilitating the building. While a historic sign\
+    \ saying Girls Only still resides inside, everyone is  welcome at AHG today.\n\
+    \ Now you can look outside in the courtyard. You can see the beautiful black lady\
+    \ sculpture, This sculpture, titled Sentinel IV, was created by Simone Leigh,\
+    \ a famous American artist whose work honors Black Feminine forms. Leigh sites\
+    \ that in using the term\u201Csentinel\u201D\u2014a person or thing that stands\
+    \ watch\u2014Leigh honors Black femininity while also investigating historical\
+    \ and intersecting ideas of race, beauty, and the association of Black women\u2019\
+    s bodies with work. The original design is inspired after an ancient Nigerian\
+    \ Spoon, and it faces outwards to protect AHG."
+  pos_x: -31.4189535683
+  pos_y: -7.35244915935
+  room: 2
+  rot_w: 0.707050434268
+  rot_z: -0.707163123615
+  visitable: true
+Mobile Autonomy Lab:
+  floor: 2
+  info: You can notice videos of the robots that are inside this lab in action. Upon
+    entering the lab you can see a number of carts, cars, and /u201Cdog/u201D robots
+    lying around. Sometimes there are mini roads set up. These are  mobile autonomous
+    robots, and the scenes are for them to navigate through. Mobile autonomous robotics,
+    or robots  that navigate and move on their own, have been a huge part of Texas
+    Robotics since the beginning of Robotics research here at UT Austin. The robots
+    today can avoid obstacles and people, detect terrains, and you will sometimes
+    see them  walking around AHG by themselves. Some functions that they are working
+    to develop are machine learning corrective actions, like stepping back to open
+    a door or stabilizing when pushed. Dr. Biswas/u2019s lab even has had a quadruped
+    that ran 5 miles at Town lake. On campus, there are other autonomous robots that
+    are not housed in AHG, including Director of  Texas Robotics, Peter Stone/u2019s,
+    Robot Soccer League. He hopes his team can win the human soccer World Cup by 2050.
+    Technologies used for soccer playing robots are also being used to develop robots
+    to assist in many other aspects of society. The work requires expertise in computer
+    vision, robotics, and understanding about how autonomous agents work together
+    The Mobile Autonomous work and technology created here by numerous labs is important
+    for all kinds of robotics, including robots that live and work with humans.
+  pos_x: -5.17380607888
+  pos_y: -9.21164174672
+  room: 2
+  rot_w: 0.762691946128
+  rot_z: -0.646761930938
+  visitable: true
+Mobile Autonomy Lab Window 1:
+  floor: 2
+  info: Mock apartment, astro
+  pos_x: -6.24867258756
+  pos_y: -5.56777214126
+  room: 2
+  rot_w: 0.998780405352
+  rot_z: -0.0493730886696
+  visitable: true
+Nuclear and Applied Robotics Lab:
+  floor: 1
+  info: This is the Nuclear and Applied Robotics Lab. It is home to robotics projects
+    that are  intended to work in dangerous or uninhabitable environments, like aerospace,
+    nuclear plants, oil fields, and more. Through the window, you can see a number
+    of the robots. Charging in against the back wall (most of the time) is Alph, a
+    spot robot like the one we saw upstairs, but with an arm. Alf searches through
+    environments for Alpha radiation, and can climb stairs and open doors. Against
+    the wall is also Magmi, who detects radiation on floors, and Vault Bot, the car
+    with the arms, who searches hazardous environments for radioactive materials.
+    There a number of these robots who are built for the energy industry. These include
+    the one you see holding the bowling ball, Scorpio, who is built to lift heavy
+    spherical payloads in nuclear facilities, and our Multiuse Workcell, the large
+    metal box with robotic arms in it. The Multiuse Workcell is used to handle hazardous
+    materials safely, while interacting with humans. Normally on the desks against
+    this wall is our Wombat, a robot built for repairing oil tanks, and some smaller
+    prototypes that students are developing. The NARG lab is the one with the most
+    active undergraduates involved in research at any given time, with over 13 students
+    working as research assistants just for Dr. Pryor.
+  pos_x: -6.64062254517691
+  pos_y: 17.288248737141995
+  room: 1
+  rot_w: 0.7552532275811812
+  rot_z: 0.6554331104149442
+  visitable: true
+Robot Manipulator Lab:
+  floor: 1
+  info: This is the lab that is home to Texas Robotic's grasping robots, or robots
+    that   are only arms. They are used to practice situational awareness and object   manipulation,
+    that is picking up and moving items.
+  pos_x: -5.852224586699057
+  pos_y: -1.7042239092905411
+  room: 1
+  rot_w: 0.9965480884711064
+  rot_z: 0.08301751239698785
+  visitable: true
+Robot Manipulator Lab Window 1:
+  floor: 1
+  room: 1
+  info: You will first see at the back right our duel arm heavy payload robot, gifted
+    to us by   Yaskawa. An interesting project being developed by a graduate student
+    here is   attempting to connect responses in the robotic arms to the muscle movements   of
+    humans. She hopes to give a paraplegic artist here in Austin the ability to   paint
+    using the connection between his neck muscle movement and the robotic   arms.
+  pos_x: -5.857055716454771
+  pos_y: 0.4409454992761943
+  rot_w: 0.9990466215056502
+  rot_z: 0.04365601972404676
+  visitable: true
+Robot Manipulator Lab Window 2:
+  floor: 1
+  info: ''
+  pos_x: -5.86394494115
+  pos_y: 7.13459300671
+  room: 1
+  rot_w: 0.97258502214
+  rot_z: 0.232547575154
+  visitable: true
+Robot Manipulator Lab Window 3:
+  floor: 1
+  info: Robot Manipulator Lab is shared between Dr. Martin Martin and Dr. Yuke Zhu.
+    If you remember   the mock apartment and kitchen that we saw upstairs, through
+    Dr. Martin   Martin's lab, he attempts to improve the capabilities of robots to
+    identify and   manipulate objects in a household situation. The robots in this
+    lab are used to   program new ways for the robots to learn how to identify objects
+    and move   them around.   You can also see the tradmil here which is used for
+    health related robotics and humanoid robots
+  pos_x: -6.169837081971677
+  pos_y: 11.358060888920877
+  rot_w: 0.898174992835258
+  rot_z: -0.4396381264692405
+  room: 1
+  visitable: true
+Simulated Apartment:
+  floor: 2
+  info: This space around us serves as a simulated apartment environment. This space
+    is primarily used by the LWR Lab to model at-home service robot tasks.
+  pos_x: -0.18602569360395904
+  pos_y: 5.153294688670988
+  room: 202
+  rot_w: 0.4067785536250513
+  rot_z: 0.9135267967119034
+  visitable: false
+Simulated Hallway:
+  floor: 2
+  info: A simulated hallway environment used by the LWR Lab to conduct social navigation
+    experiments and test robot hallway passing behaviors.
+  pos_x: 5.73433762201
+  pos_y: -4.837630226
+  room: 202
+  rot_w: 0.868084008688
+  rot_z: 0.496417318252
+  visitable: false
+The Advanced Robotic Technologies:
+  floor: 2
+  info: "This lab is Dr. Alambeigi\u2019s lab, also known as the Advanced Robotic\
+    \ Technologies for Surgery Lab,  who works with simulating surgical operations\
+    \ and developing new techniques for surgical procedures. They  allow authorized\
+    \ access only. You can see the Videos of internal projects is visible on TV. Some\
+    \ of their  key projects include creating sensors for cancer detection, 3D printing\
+    \ muscles, xbox controller controlled  colonoscopies, flexible bone screws, and\
+    \ drills for osteoporosis. For one of these projects, Farshid Alambeigi\u2019\
+    s  lab in conjunction with MD Anderson is designing robotic endoscopes for colonoscopy\
+    \ and gastroscopy procedures that  will enable doctors to \u201Cfeel\u201D tumors\
+    \ and polyps through very sensitive haptic feedback sensors.  Additionally, a\
+    \ master\u2019s student in the ReNeu lab used robotics arms donated by Yaskawa\
+    \ to help a paraplegic artist paint again using EMG sensors on the neck. Think\
+    \ about the impact these arms could have in helping folks with similar injuries\
+    \ regain some autonomy over their lives."
+  pos_x: -57.08889551437312
+  pos_y: -8.479338440144675
+  room: 2
+  rot_w: 0.8886612243654021
+  rot_z: -0.45856431207561754
+  visitable: true
+TroCar:
+  floor: 2
+  info: One exciting project that an undergraduate student has developed is a device
+    for training doctors to perform trocar insertion. A trocar is a tube inserted
+    into the abdomen to perform minimally invasive procedures. The trocar insertion
+    is complicated to perform because the tube must pass through the skin, muscle,
+    and fat without damaging organs, but the muscle requires more force to puncture
+    than the organs. This device provides haptic feedback and a virtual simulation
+    to train doctors to understand how to manage this pressure difference, and perform
+    these procedures safer.
+  pos_x: -67.2631595976522
+  pos_y: 10.02353505815421
+  room: 304
+  rot_w: 0.9999953352748544
+  rot_z: -0.003054411323210146
+  visitable: false
+
+Treadmill:
+  floor: 1
+  info: A treadmill used to test humaniod walking robots
+  pos_x: -1.93152330351
+  pos_y: 12.2093978491
+  room: 
+  rot_w: 0.95644245463
+  rot_z: -0.291920932758
+  visitable: true

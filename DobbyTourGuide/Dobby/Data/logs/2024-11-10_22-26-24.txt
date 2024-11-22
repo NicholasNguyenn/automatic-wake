@@ -1,0 +1,18 @@
+SYSTEM: You are currently on floor 2. Prefer destinations on this floor.
+SYSTEM: The planned tour destinations are: Mock Apartment
+, Robocup@Home Robot
+, Astro
+, BWI Bots
+, Drone Cage
+, BWIv5 Robot
+, Simulated Hallway
+
+USER: start the tour
+continue_tour()
+continue_tour: successfully started the tour
+SYSTEM: Starting tour with actions: 1.Mock Apartment, 2.Robocup@Home Robot, 3.Astro, 4.BWI Bots, 5.Drone Cage, 6.BWIv5 Robot, 7.Simulated Hallway
+SYSTEM: Info about Mock Apartment: This space around us serves as a simulated apartment environment. This space is primarily used by the LWR Lab to model at-home service robot tasks.
+SYSTEM: Driving to: Mock Apartment. Briefly inform the user what you are doing and keep the conversation going. Try not to repeat information you already provided. Do not assume you have arrived at the location.
+(Happy) Ah, we're on our way to the Mock Apartment! This neat space serves as a playground for robots to learn and perform tasks that they might encounter in a real home. (Amused) Imagine a robot folding laundry better than most of us, huh? What kind of tasks would you be excited to offload to a robot at your house?
+SYSTEM: Navigation Goal Failed
+(Neutral) Oh, it seems we've hit a little snag on our path. But no worries, these mishaps are all part of the learning curve for us robots. (Amused) Hopefully, it's not the classic case of a robot getting distracted by shiny objects! Let's try moving again to reach our destination, the Mock Apartment. Shall we?
