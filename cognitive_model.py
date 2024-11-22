@@ -1,12 +1,13 @@
 import record_audio as rec
-import model_response as llama
-
+import model_response as gpt
+import json
+import gpt_model_key as model_key
 
 class CognitiveModel:
 
     def __init__(self):
         self.recorder = rec.Recorder()
-        self.model = llama.LLModel()
+        self.model = gpt.LLModel(model_key.key)
 
 
     def listen_loop(self):
@@ -25,6 +26,6 @@ class CognitiveModel:
                                                     diarization_segments)
         
         # Decide if we should respond given the conversation we've heard
-        action = self.model.appropriate_action(speaker_transcriptions)
-        print("action decided by model: ")
-        print (action)
+        response = self.model.appropriate_action(speaker_transcriptions)
+        action = json.loads(response)
+        print(action["name"])

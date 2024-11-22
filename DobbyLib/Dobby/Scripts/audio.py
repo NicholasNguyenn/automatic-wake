@@ -184,7 +184,7 @@ class Recorder:
         while not self.stop_listening_event.is_set():
             action = self.cognitive_model.listen_loop()
             if action["name"] == 'get_robot_response' and not self.stop_listening_event.is_set():
-                callback(action["user_input"])
+                callback(action["parameters"]["user_input"])
             
 
     def listen_keyword(self, callback):

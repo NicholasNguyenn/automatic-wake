@@ -86,7 +86,7 @@ class Recorder:
         audio = AudioSegment.from_wav(audio_file)
         
         # Load the Whisper model
-        model = whisper.load_model("base")
+        model = whisper.load_model("medium")
         
         # List to hold transcription for each turn of speaking
         turn_transcriptions = []
