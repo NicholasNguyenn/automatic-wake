@@ -7,6 +7,8 @@ from playsound import playsound
 import random
 import pygame
 from Dobby.Scripts.environment_state import Action, Predicate
+from Dobby.Scripts.CognitiveModel.cognitive_model import CognitiveModel
+
 
 from typing import List
 from typing import Callable
@@ -37,6 +39,8 @@ class Dobby:
 
         self.__agent = Agent(prompt, actions, predicates, cancel_function, self.__audio_recorder, self.__set_event_flag, self.__incoming_response)
 
+        self.cognitive_model = CognitiveModel()
+
         if gui_enabled:
             self.__ui = GUI(self.__toggle_recording, self.get_robot_response, self.__agent.get_state)
             self.__agent.set_logger(self.__ui.log_console)
@@ -58,7 +62,7 @@ class Dobby:
     def start_conversation(self):
         """interrupt idling and begin recording a user's input"""
         if not self.__is_recording:
-            self.__audio_recorder.stop_listening()
+            self.__audio_recorder.stop_recording()
             self.__recording_tone.play()
             self.__toggle_recording()
 
@@ -94,17 +98,11 @@ class Dobby:
     # use the loop we make to record audio and wait of the cognitive model to decide its time to interject
     # we will need to start a new theread and make a callback function
     def __begin_idling(self):
-        self.__audio_recorder.start_listening(self.__enter_conversation)
+        self.__toggle_recording()
         self.log_console("Listening for Dobby...", True)
         if self.__idle_hook != None:
             self.__idle_hook()
-        # def __heard_keyword(self, direction, direction_index):
-        #     self.__enqueue_callback(self.start_conversation)
 
-    def __enter_conversation(self, transcription):
-        generate_response = partial(self.get_robot_response, transcription)
-        self.__enqueue_callback(generate_response)
-        self.__enqueue_callback(self.start_conversation)
 
     def __recording_finished(self):
         self.__enqueue_callback(self.__toggle_recording)
@@ -114,7 +112,6 @@ class Dobby:
             self.__is_recording = True
             if self.__recording_hook != None:
                 self.__recording_hook(True)
-            self.__audio_recorder.stop_listening()
             self.__audio_recorder.start_recording(self.__recording_finished, self.__hey_dobby_mode())
             if self.__ui_enabled:
                 self.__ui.display_recording(True)
@@ -130,9 +127,9 @@ class Dobby:
             self.__recording_tone.play()
             if not respond:
                 return
-            user_input = audio.transcribe_into_text()
-            if re.search(r"[a-z]", user_input, flags=re.IGNORECASE):
-                self.get_robot_response(user_input)
+            action = self.cognitive_model.decide_action()
+            if action["name"] == 'get_robot_response':
+                self.get_robot_response(action["parameters"]["user_input"])
             else:
                 if self.__event_flag:
                     self.__event_flag = False
@@ -141,7 +138,7 @@ class Dobby:
                     self.__begin_idling()
                 elif self.__agent.get_state() == "EXECUTING" and self.__hey_dobby_mode():
                     self.log_console("Listening for Dobby...", True)
-                    self.__audio_recorder.start_listening(self.__heard_keyword)
+                    self.__begin_idling()
 
     def __hey_dobby_mode(self):
         if self.__ui_enabled:
@@ -157,7 +154,6 @@ class Dobby:
         self.__audio_recorder.set_recieving_response(val)
         self.__event_flag = False
         if not val:
-            self.__audio_recorder.stop_listening()
             self.log_console("")
         if val:
             self.__audio_recorder.start_speaking(finished_callback=self.__finished_speaking_callback)
@@ -212,7 +208,7 @@ class Dobby:
             while True:
                 self.__consume_callback()
 
-        self.__audio_recorder.stop_listening()
+        self.__audio_recorder.stop_recording()
         self.__audio_recorder.stop_speaking()
 
 if __name__ == "__main__":

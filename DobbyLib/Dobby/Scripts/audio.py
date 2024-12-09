@@ -16,7 +16,7 @@ from functools import partial
 import math
 import re
 from collections import deque
-from Dobby.Scripts.auto_wake.cognitive_model import CognitiveModel
+from Dobby.Scripts.CognitiveModel.cognitive_model import CognitiveModel
 
 # generate a dictionary file with http://www.speech.cs.cmu.edu/tools/lextool.html
 
@@ -36,23 +36,14 @@ class Recorder:
     generating_audio = False
 
     def __init__(self):
-        # modeldir = get_model_path()
-        # self.decoder = Decoder(
-        #     keyphrase="dobby",
-        #     hmm=os.path.join(modeldir, "en-us/en-us"),
-        #     dict="Dobby/Data/audio/keyword.dict",
-        #     kws_threshold=1e-9,
-        # )
         self.frames = []
         self.audio = pyaudio.PyAudio()
         self.talking_threshold = 40
         self.stop_recording_event = threading.Event()
-        self.stop_listening_event = threading.Event()
         self.stop_speaking_event = threading.Event()
         self.speaking = False
         self.recieving_response = False
         self.recording = False
-        self.cognitive_model = CognitiveModel()
 
     def calibrate_microphone(self, threshold=2):
         print("Calibrating microphone for 5 chunks... Stay silent")
@@ -114,6 +105,7 @@ class Recorder:
         chunks = 0
         speaking = False
         speaking_threshold = 0
+        speech_detected = False
      
         print("Recording...")
         while not self.stop_recording_event.is_set() and (
@@ -134,6 +126,7 @@ class Recorder:
                 if last_rms != 0 and rms - last_rms > last_rms * 0.7:
                     if not speaking:
                         speaking = True
+                        speech_detected = True
                         #set threshold halfway between silent and speaking 
                         speaking_threshold = last_rms + (rms - last_rms) * 0.5
                         print ("Started speaking " + str(speaking_threshold))
@@ -150,18 +143,33 @@ class Recorder:
         stream.stop_stream()
         stream.close()
 
-        # Save recorded audio to file
-        input_file_count += 1
         file_name = self.WAVE_OUTPUT_FILENAME + ".wav"
-        waveFile = wave.open(file_name, "wb")
-        waveFile.setnchannels(self.CHANNELS)
-        waveFile.setsampwidth(self.audio.get_sample_size(self.FORMAT))
-        waveFile.setframerate(self.RATE)
-        waveFile.writeframes(
-            b"".join(self.frames[: len(self.frames) - (min(0, silent_chunks - 1))])
-        )
-        waveFile.close()
-        print("Saved recording to", file_name)
+        
+        if speech_detected:
+            # Save recorded audio to file
+            input_file_count += 1
+            waveFile = wave.open(file_name, "wb")
+            waveFile.setnchannels(self.CHANNELS)
+            waveFile.setsampwidth(self.audio.get_sample_size(self.FORMAT))
+            waveFile.setframerate(self.RATE)
+            waveFile.writeframes(
+                b"".join(self.frames[: len(self.frames) - (min(0, silent_chunks - 1))])
+            )
+            waveFile.close()
+            print("Saved recording to", file_name)
+        else:
+            # Silence detected. If the current file is just silence we don't need 
+            # to save another silent file
+            with wave.open(file_name, 'rb') as wave_file:
+                if wave_file.getnframes() != 0:
+                    input_file_count += 1
+                    waveFile = wave.open(file_name, "wb")
+                    waveFile.setnchannels(self.CHANNELS)
+                    waveFile.setsampwidth(self.audio.get_sample_size(self.FORMAT))
+                    waveFile.setframerate(self.RATE)
+                    waveFile.writeframes(b"".join(self.frames))  # Save empty WAV
+                    waveFile.close()
+
         self.frames = []
 
         #recorder.add_audio_clip(file_name, time.time())
@@ -171,52 +179,6 @@ class Recorder:
 
         self.recording = False
 
-    def start_listening(self, callback):
-        self.stop_listening_event = threading.Event()
-        self.listen_thread = threading.Thread(
-            target=self.wait_turn, args=(callback,), daemon=True
-        )
-        self.listen_thread.start()
-
-    def stop_listening(self):
-        # stop listening thread
-        self.stop_listening_event.set()
-
-    def wait_turn(self, callback):
-        while not self.stop_listening_event.is_set():
-            action = self.cognitive_model.listen_loop()
-            print("listen loop ended, received action: " + action["name"])
-            if action["name"] == 'get_robot_response' and not self.stop_listening_event.is_set():
-                callback(action["parameters"]["user_input"])
-            
-
-    def listen_keyword(self, callback):
-        stream_single = self.audio.open(
-            format=self.FORMAT,
-            channels=self.CHANNELS,
-            rate=self.RATE,
-            input=True,
-            frames_per_buffer=self.CHUNK,
-        )
-
-        self.decoder.start_utt()
-        # Loop until keyword is detected
-        while not self.stop_listening_event.is_set():
-            data = stream_single.read(self.CHUNK, exception_on_overflow=False)
-            self.frames = [data]
-            self.decoder.process_raw(data, False, False)
-            if self.decoder.hyp() != None:
-                print(
-                    [
-                        (seg.word, seg.prob, seg.start_frame, seg.end_frame)
-                        for seg in self.decoder.seg()
-                    ]
-                )
-                if not self.stop_listening_event.is_set():
-                    callback("front", 0)
-        self.decoder.end_utt()
-        stream_single.stop_stream()
-        stream_single.close()
 
     def enqueue_speech_line(self, line):
         self.speech_line_queue.append(line)

@@ -2,6 +2,8 @@ import torch
 import json
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import openai
+import re
+
 
 
 class LLModel:
@@ -61,6 +63,15 @@ class LLModel:
     # get response from GPT given the transcription of the conversation
     # heard by Dobby
     def appropriate_action(self, conversation):
+        #if conversation is empty don't invoke model
+        if not re.search(r"[a-z]", conversation, flags=re.IGNORECASE):
+            return """
+            {
+                "name": "do_nothing"
+            }
+            """.strip()
+
+
         # Combine the system prompt and user conversation
         messages = [
             {"role": "system", "content": self.system_prompt},
