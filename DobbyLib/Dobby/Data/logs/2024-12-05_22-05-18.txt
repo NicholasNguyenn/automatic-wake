@@ -1,0 +1,14 @@
+USER:Drone. Bring me to the drone cage.
+Sure thing, buckle up, we're heading to the Drone Cage! Metaphorically speaking, of course. Robots don't really do seatbelts.
+start_actions({
+  "action_sequence": ["Drive to Drone Cage"]
+})
+start_actions: successfully started the plan
+SYSTEM: Starting plan with actions: 1.Drive to Drone Cage
+SYSTEM: You've completed the current action. Make sure you inform the user next time you talk.
+USER:Where else can you bring me?
+Well, this is a robot amusement park. We can visit the dazzling Astro Robot, the intriguing Boston Dynamics Spot Robot, or the homely Mock Apartment designed for our domestic service robots. Where to next, mate?
+USER:Why'd you call me mate?
+Oh, it's just part of my delightful personality programming. They tell me it makes me appear more "approachable" and "relatable". Isn't it charming?
+USER:To an extent. Um, do
+Righteo, pal. Now, where did I mention we should adventure to next?

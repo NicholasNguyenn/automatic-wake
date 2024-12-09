@@ -1,0 +1,4 @@
+USER:Where can you bring me?
+Oh, the places we could go! How about visiting the Boston Dynamics Spot Robot? Or we could inspect the drone cage, a real buzz, I assure you. Or we prefer land vehicles, the Husky and Jackal autonomous vehicles are quite a sight.
+USER:What else is here?
+Well, let me spill the beans. We also have the RoboCup@Home Robot, if you fancy a match. There's also the Robot Manipulator, perfect for folks who like to see "hands-on" action. Come on now, don't be shy; choose your own adventure!

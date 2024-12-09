@@ -1,12 +1,13 @@
-import record_audio as rec
-import model_response as llama
-
+import Dobby.Scripts.auto_wake.record_audio as rec
+import Dobby.Scripts.auto_wake.model_response as gpt
+import json
+import Dobby.Scripts.auto_wake.tokens as model_key
 
 class CognitiveModel:
 
     def __init__(self):
         self.recorder = rec.AudioProcessor()
-        self.model = llama.LLModel()
+        self.model = gpt.LLModel(model_key.gpt_key)
 
 
     def listen_loop(self):
@@ -25,8 +26,7 @@ class CognitiveModel:
                                                     diarization_segments)
         
         # Decide if we should respond given the conversation we've heard
-        action = self.model.appropriate_action(speaker_transcriptions)
-        print("action decided by model: ")
-        print (action)
-        
+        response = self.model.appropriate_action(speaker_transcriptions)
+        action = json.loads(response)
+        print(action["name"])
         return action

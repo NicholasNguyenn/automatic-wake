@@ -1,99 +1,83 @@
 import torch
 import json
 from transformers import AutoModelForCausalLM, AutoTokenizer
+import openai
 
-# Check if GPU is available
-    # device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
-# Load the tokenizer and model
-# normal
-#   model_name = r"C:\Users\Nick\.cache\huggingface\hub\models--meta-llama--Llama-3.2-1B\snapshots\221e3535e1ac4840bdf061a12b634139c84e144c"
-# instruct
-#   model_name = r"C:\Users\Nick\.cache\huggingface\hub\models--meta-llama--Llama-3.2-3B-Instruct\snapshots\392a143b624368100f77a3eafaa4a2468ba50a72"
-# lab machine
-    # model_name = "/home/bwilab/.cache/huggingface/hub/models--meta-llama--Llama-3.2-3B/snapshots/392a143b624368100f77a3eafaa4a2468ba50a72"
-    # tokenizer = AutoTokenizer.from_pretrained(model_name)
-    # model = AutoModelForCausalLM.from_pretrained(model_name).to(device)
 
 class LLModel:
-    model_name = r"C:\Users\Nick\.cache\huggingface\hub\models--meta-llama--Llama-3.2-3B-Instruct\snapshots\392a143b624368100f77a3eafaa4a2468ba50a72"
-    function_definitions = """[
+    function_definitions = """
+    [
         {
             "name": "get_robot_response",
-            "description": "Get a response from the agent based on the user's input. 
-                            Calling this function would generate a response and 
-                            cause Dobby to speak out loud",
+            "description": "Generate a response from the agent.",
             "parameters": {
-                "user_input": {
-                "type": "string",
-                "description": "The text from the current conversation that the agent 
-                                should respond to. This text is used to prompt the agent.
-                                Should come directly from the user, such as the last few
-                                lines from the current ongoing conversation"
-                },
+                "user_input": "Text from the conversation to prompt the agent."
             }
+        },
+        {
             "name": "do_nothing",
-            "description": "Nothing should be done because there is no indication 
-                            that Dobby is needed",
-            
-            "name": "do_a_dance",
-            "description": "Dance around like you just don't care. Very obnoxious 
-                            but could be fun",
+            "description": "Do nothing, as Dobby is not needed."
         }
     ]
     """
-    system_prompt = """You are a converstional robot named Dobby in the robotics 
-    building. You have overheard a conversation going on around you and have a set 
-    of possible functions. Based on the conversation you have heard, you will need
-    to make ONE function call to respond appropriately to the situation.
 
-    When you decide to invoke a function, you MUST put it in the format of 
-    [func_name1(params_name1=params_value1, params_name2=params_value2...)\n
-    You SHOULD NOT include any other text in the response.
+    system_prompt = """You are currently in the Living with Robots lab in the AHG building at the University of Texas at Austin.
+    You are a domestic service robot who was programmed by students doing research for the living with robots lab.
+    You use chatGPT to generate action plans and interact with humans using natural language.
+    Additionally, this system will serve as a platform to build off of and a way to showcase the software being developed in the lab.
 
-    Here is a list of functions in JSON format that you can 
-    invoke.\n\n{functions}\n""".format(functions=function_definitions)
+    The lab has things such as the following, keep them in mind in case someone mentions them and they might be curious:
+    
+    Astro Robot
+    BWI Bots
+    BWIV5 Robot
+    Boston Dynamics Spot Robot
+    Drone Cage
+    Husky and Jackel Autonomous Vehicles
+    Mock Apartment
+    RoboCup@Home Robot
+    Robot Manipulator
+    Social Navigation Hallway
+    
+    Based on the conversation you overheard, you will call one of the provided functions.
 
-    def __init__(self):
-        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        self.model_name = r"C:\Users\Nick\.cache\huggingface\hub\models--meta-llama--Llama-3.2-3B-Instruct\snapshots\392a143b624368100f77a3eafaa4a2468ba50a72"
-        self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
-        self.model = AutoModelForCausalLM.from_pretrained(self.model_name).to(self.device)
+    Choose only one function to invoke. Your response should only be a JSON object. Do not include any other text, formatting, or Markdown syntax (like triple backticks or language specifiers). The JSON object should look like this:
+    {{
+        "name": "get_robot_response",
+        "parameters": {{
+            "user_input": "Text from the conversation to prompt the agent."
+        }}
+    }}
+    Here is a list of functions in JSON format that you can invoke:
+
+    {functions}
+    """.format(functions=function_definitions)
 
 
-    # get response from Llama given the transcription of the conversation
+    def __init__(self, api_key):
+        openai.api_key = api_key
+
+
+    # get response from GPT given the transcription of the conversation
     # heard by Dobby
     def appropriate_action(self, conversation):
+        # Combine the system prompt and user conversation
+        messages = [
+            {"role": "system", "content": self.system_prompt},
+            {"role": "user", "content": conversation}
+        ]
 
-        print("Current device: ", torch.cuda.current_device())
-        print("GPU name: ", torch.cuda.get_device_name(torch.cuda.current_device()))
-        
-        #create prompt
-        prompt = (
-            f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>"
-            f"{self.system_prompt}<|eot_id|>"
-            f"<|start_header_id|>user<|end_header_id|>"
-            f"{conversation}<|eot_id|>"
-            f"<|start_header_id|>assistant<|end_header_id|>"
-        )
+        # Generate response using GPT
+        try:
+            chat_completion = openai.ChatCompletion.create(
+                model="gpt-4o",
+                messages=messages
+            )
 
-        # Encode the input prompt
-        inputs = self.tokenizer(prompt, return_tensors="pt")
-        
-        # Move input tensors to the GPU if available
-        inputs = {key: value.to(self.device) for key, value in inputs.items()}
-
-        # Generate output using the model
-        with torch.no_grad():
-            # Adjust max_length for longer/shorter responses
-            output = self.model.generate(**inputs, max_length=400, num_return_sequences=1
-                                    ,eos_token_id=self.tokenizer.eos_token_id)
-        
-        # Decode the output tokens to string
-        response = self.tokenizer.decode(output[0], skip_special_tokens=True).strip()
-
-        print(response)
-
-        result = response.split("assistant")[1]
-
-        return result
+            # Extract and return the assistant's reply
+            result = chat_completion.choices[0].message.content.strip()
+            print("result" + result)  # Debugging output
+            return result
+        except Exception as e:
+            print(f"Error generating response: {e}")
+            return None

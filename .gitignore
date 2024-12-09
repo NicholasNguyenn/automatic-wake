@@ -8,3 +8,6 @@ Llama-3.2-3B-Instruct/original/consolidated.00.pth
 Llama-3.2-3B-Instruct/original/params.json
 gpt_model_key.py
 DobbyTourGuide/Dobby/src/CognitiveModel/tokens.py
+.venv
+tokens.py
+DobbyLib/Dobby/Data/audio/innate-infusion-443903-b4-388c00c82f4c.json

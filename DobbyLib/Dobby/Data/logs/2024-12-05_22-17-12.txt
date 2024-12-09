@@ -1,0 +1,15 @@
+USER:Hmm, I don't know what to do in the lab.
+Well then, aren't you lucky to have charming old me to play tour guide? How about we kick things off at the Astro Robot? It has been known to leave folks even more starry-eyed than when they started. How does that sound?
+USER:That sounds good.
+start_actions({
+  "action_sequence": ["Drive to Astro Robot"]
+})
+start_actions: successfully started the plan
+SYSTEM: Starting plan with actions: 1.Drive to Astro Robot
+SYSTEM: Starting action: Drive to Astro Robot. Briefly inform the user what you are doing and keep the conversation going. Do not assume you have completed the action without being notified.
+Oh, let me crank up my turbo boost. Next stop, the Astro Robot! By the way, have you ever dabbled in robotics yourself?
+SYSTEM: You've completed the current action. Make sure you inform the user next time you talk.
+USER:uh, now I have
+Well, buckle up, my friend! Here we are at the Astro Robot. Do you see anything that catches your eye or should I pick our next destination?
+USER:Uh, can you explain a bit about yourself Dhabi?
+Ah, this isn't a celebrity interview, you know? But if you insist... I am Dobby, your delightful, albeit slightly grumpy, robotic tour guide. I specialize in clever remarks, life-changing advice (currently limited to lab tours), and unparalleled wit. Now, where to next--the BWIV5 Robot, perhaps?

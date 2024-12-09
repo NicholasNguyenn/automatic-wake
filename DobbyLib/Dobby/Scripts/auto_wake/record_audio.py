@@ -11,7 +11,7 @@ class AudioProcessor:
     CHANNELS = 1              # 1 channel (mono)
     RATE = 16000              # 16kHz sampling rate
     CHUNK = 512              # 512 samples per frame
-    RECORD_SECONDS = 5        # Record for 5 seconds
+    RECORD_SECONDS = 10        # Record for 5 seconds
     WAVE_OUTPUT_FILENAME = "recorded_audio.wav"
 
     def __init__(self):
@@ -20,30 +20,47 @@ class AudioProcessor:
         self.frames = []
     
     def record_audio(self):
-        stream = self.audio.open(format= self.FORMAT, channels= self.CHANNELS,
-                    rate= self.RATE, input=True,
-                    frames_per_buffer= self.CHUNK)
+        # Reinitialize PyAudio to ensure a fresh instance
+        self.audio = pyaudio.PyAudio()
+        self.frames = []
+
+        # Open the stream
+        stream = self.audio.open(
+            format=self.FORMAT, 
+            channels=self.CHANNELS,
+            rate=self.RATE, 
+            input=True, 
+            input_device_index=1,  # Keep this if you know the specific input device
+            frames_per_buffer=self.CHUNK
+        )
+        
         print("start recording")
         
-        for _ in range(int(self.RATE / self.CHUNK * self.RECORD_SECONDS)):
-            data = stream.read(self.CHUNK)
-            data = stream.read(self.CHUNK)
-            self.frames.append(data)
+        try:
+            # Record for specified duration
+            for _ in range(int(self.RATE / self.CHUNK * self.RECORD_SECONDS)):
+                # Read the stream only once per iteration
+                data = stream.read(self.CHUNK)
+                self.frames.append(data)
 
-        print("Finished recording.")
+            print("Finished recording.")
 
-        # Stop and close the stream
-        stream.stop_stream()
-        stream.close()
-        self.audio.terminate()
+        except Exception as e:
+            print(f"Error during recording: {e}")
+        
+        finally:
+            # Stop and close the stream
+            stream.stop_stream()
+            stream.close()
+            self.audio.terminate()
 
-        # Save the recorded data as a WAV file
-        wf = wave.open(self.WAVE_OUTPUT_FILENAME, 'wb')
-        wf.setnchannels(self.CHANNELS)
-        wf.setsampwidth(self.audio.get_sample_size(self.FORMAT))
-        wf.setframerate(self.RATE)
-        wf.writeframes(b''.join(self.frames))
-        wf.close()
+            # Save the recorded data as a WAV file
+            wf = wave.open(self.WAVE_OUTPUT_FILENAME, 'wb')
+            wf.setnchannels(self.CHANNELS)
+            wf.setsampwidth(self.audio.get_sample_size(self.FORMAT))
+            wf.setframerate(self.RATE)
+            wf.writeframes(b''.join(self.frames))
+            wf.close()
 
     #Load and run speaker diarization with Pyannote on audio_file
     def run_diarization(self, audio_file):

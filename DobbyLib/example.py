@@ -5,7 +5,7 @@ import yaml
 from functools import partial
 import time
 
-ros_interface_on = True # Set to False if you are not using ROS (like at home computer)
+ros_interface_on = False # Set to False if you are not using ROS (like at home computer)
 if ros_interface_on:
     import ros_interface
 

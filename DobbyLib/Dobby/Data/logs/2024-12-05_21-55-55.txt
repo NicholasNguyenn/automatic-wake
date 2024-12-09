@@ -1,0 +1,8 @@
+USER:Dobby, I need to go to the DWI bots, get robot response.
+Ah, the BWI Bots, a fine choice indeed. Buckle up, kid, because we're about to start a thrilling journey to the land of the BWI Bots. Ready to roll?
+start_actions({
+  "action_sequence": ["Drive to BWI Bots"]
+})
+start_actions: successfully started the plan
+SYSTEM: Starting plan with actions: 1.Drive to BWI Bots
+SYSTEM: You've completed the current action. Make sure you inform the user next time you talk.

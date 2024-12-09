@@ -7,6 +7,7 @@ import wave
 from google.cloud import texttospeech
 from google.cloud import speech
 from pocketsphinx import *
+import pocketsphinx
 import audioop
 import pyaudio
 import io
@@ -15,7 +16,7 @@ from functools import partial
 import math
 import re
 from collections import deque
-from auto_wake.cognitive_model import CognitiveModel
+from Dobby.Scripts.auto_wake.cognitive_model import CognitiveModel
 
 # generate a dictionary file with http://www.speech.cs.cmu.edu/tools/lextool.html
 
@@ -35,13 +36,13 @@ class Recorder:
     generating_audio = False
 
     def __init__(self):
-        modeldir = get_model_path()
-        self.decoder = Decoder(
-            keyphrase="dobby",
-            hmm=os.path.join(modeldir, "en-us/en-us"),
-            dict="Dobby/Data/audio/keyword.dict",
-            kws_threshold=1e-9,
-        )
+        # modeldir = get_model_path()
+        # self.decoder = Decoder(
+        #     keyphrase="dobby",
+        #     hmm=os.path.join(modeldir, "en-us/en-us"),
+        #     dict="Dobby/Data/audio/keyword.dict",
+        #     kws_threshold=1e-9,
+        # )
         self.frames = []
         self.audio = pyaudio.PyAudio()
         self.talking_threshold = 40
@@ -101,6 +102,7 @@ class Recorder:
             channels=self.CHANNELS,
             rate=self.RATE,
             input=True,
+            input_device_index=1,
             frames_per_buffer=self.CHUNK,
         )
 
@@ -183,6 +185,7 @@ class Recorder:
     def wait_turn(self, callback):
         while not self.stop_listening_event.is_set():
             action = self.cognitive_model.listen_loop()
+            print("listen loop ended, received action: " + action["name"])
             if action["name"] == 'get_robot_response' and not self.stop_listening_event.is_set():
                 callback(action["parameters"]["user_input"])
             
@@ -285,7 +288,7 @@ class Recorder:
 
 
 # Google API
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "Dobby/Data/audio/google_api_config.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "Dobby/Data/audio/innate-infusion-443903-b4-388c00c82f4c.json"
 client = texttospeech.TextToSpeechClient()
 speechClient = speech.SpeechClient()
 voice = texttospeech.VoiceSelectionParams(
