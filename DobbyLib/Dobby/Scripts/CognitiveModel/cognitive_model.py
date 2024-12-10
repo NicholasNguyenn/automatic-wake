@@ -3,13 +3,14 @@ import Dobby.Scripts.CognitiveModel.model_response as gpt
 import json
 import Dobby.Scripts.CognitiveModel.tokens as model_key
 import wave
+from collections import deque
 
 class CognitiveModel:
 
     def __init__(self):
         self.audio = aud_proc.AudioProcessor()
         self.model = gpt.LLModel(model_key.gpt_key)
-        self.conversation = ""
+        self.conversation = deque(maxlen=10)
 
 
     def decide_action(self, audio_recording="Dobby/Data/audio/input_audio"):
@@ -33,7 +34,12 @@ class CognitiveModel:
         # Transcribe audio into turn based conversation given the diarization segments
         speaker_transcriptions = self.audio.transcribe_segments(audio_recording, 
                                                     diarization_segments)
-        self.update_conversation(speaker_transcriptions)
+        # Add transcribed lines to conversation
+        for i in range(len(speaker_transcriptions)):
+            self.update_conversation(speaker_transcriptions[i])
+
+        cur_convo = '\n'.join(self.conversation)
+        self.update_conversation(cur_convo)
 
         # Decide if we should respond given the conversation we've heard
         response = self.model.appropriate_action(self.conversation)
@@ -43,9 +49,10 @@ class CognitiveModel:
     
     def update_conversation(self, conversation_line, dobby=False):
         if dobby:
-            self.conversation += ("\n" + f"Dobby: {conversation_line}")
+            self.conversation.append(f"Dobby: {conversation_line}")
         else:
-            self.conversation += ("\n" + conversation_line)
+            self.conversation.append(conversation_line)
+
 
     def clear_conversation(self):
-        self.conversation = ""
+        self.conversation.clear()

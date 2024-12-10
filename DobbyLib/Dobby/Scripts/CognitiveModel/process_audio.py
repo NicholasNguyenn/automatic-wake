@@ -120,9 +120,7 @@ class AudioProcessor:
             turn_transcriptions.append(f"{speaker}: {text}")
             
             print(f"Transcribed segment for {speaker}: {text}")
-
-        final_transcription = '\n'.join(turn_transcriptions)
         
-        return final_transcription
+        return turn_transcriptions
 
 
