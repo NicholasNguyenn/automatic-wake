@@ -17,10 +17,6 @@ class LLModel:
         {
             "name": "do_nothing",
             "description": "Do nothing, as Dobby is not needed."
-        },
-        {
-            "name": "do_a_dance",
-            "description": "Perform an obnoxious dance."
         }
     ]
     """

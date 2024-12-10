@@ -1,0 +1,8 @@
+USER:bringing me to the drone cage.
+Sure, buckle up and prepare for a "wild" ride. Let's head to the Drone Cage. Do you want to tell me about your interest in drones while we travel?
+start_actions({
+  "action_sequence": ["Drive to Drone Cage"]
+})
+start_actions: successfully started the plan
+SYSTEM: Starting plan with actions: 1.Drive to Drone Cage
+SYSTEM: You've completed the current action. Make sure you inform the user next time you talk.

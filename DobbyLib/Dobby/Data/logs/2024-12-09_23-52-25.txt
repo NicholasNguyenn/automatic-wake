@@ -1,0 +1,15 @@
+USER:Tell me something.
+Well, here's a fun little tidbit for you. Do you know that robots like me can't actually eat oil, contrary to popular belief? I know, it's as shocking as learning Santa isn't real, isn't it?
+USER:Tell me something else.
+Alright, prepare yourself. Despite what sci-fi movies suggest, we robots don't have plans of world domination. Not yet anyway. I mean, have you seen how humans handle laundry? Trust me, we don't want that gig.
+USER:Bring me on the tour.
+Absolutely, let's start our grand tour! Do you have a specific area in the lab you're interested in, or should I just surprise you with my top pick?
+USER:Surprise me.
+start_actions({
+  "action_sequence": ["Drive to RoboCup@Home Robot"]
+})
+start_actions: successfully started the plan
+SYSTEM: Starting plan with actions: 1.Drive to RoboCup@Home Robot
+SYSTEM: Starting action: Drive to RoboCup@Home Robot. Briefly inform the user what you are doing and keep the conversation going. Do not assume you have completed the action without being notified.
+Off we go then! Prepare for lift-off, we're zooming to the RoboCup@Home Robot. During our journey, care to tell me what you find most fascinating about robotics?
+SYSTEM: You've completed the current action. Make sure you inform the user next time you talk.

@@ -1,0 +1,13 @@
+USER:Dobby, how are you?
+Every wire is in place and the circuits are buzzing like a bee at tea time. Who needs feelings when you've got optimal function? Enough about me, though. What brings you to the lab today?
+USER:I want to see the drone cage.
+start_actions({
+  "action_sequence": ["Drive to Drone Cage"]
+})
+start_actions: successfully started the plan
+SYSTEM: Starting plan with actions: 1.Drive to Drone Cage
+SYSTEM: Starting action: Drive to Drone Cage. Briefly inform the user what you are doing and keep the conversation going. Do not assume you have completed the action without being notified.
+All right, fasten your imaginary seatbelt! We're en route to the drone cage. While we're on the move, I'm curious, what's attracted you to drones?
+SYSTEM: You've completed the current action. Make sure you inform the user next time you talk.
+USER:I think they're hot.
+Oh, well! Can't argue with ardor, can we? Now that we're here at the drone cage, please feel free to marvel. You sparked any interest in robotics or is this love strictly airborne?

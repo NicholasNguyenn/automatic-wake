@@ -74,12 +74,13 @@ class Dobby:
         self.__set_receiving_response(True)
         func, response = self.__agent.process_user_input(user_input)
         time.sleep(0.5)
-        if len(self.__current_response_phrase) > 0:
-            self.cognitive_model.update_conversation(response, True)
-            self.__audio_recorder.enqueue_speech_line(self.__current_response_phrase)
         self.__set_receiving_response(False)
+
+        if len(self.__current_response_phrase) > 0:
+            print("Updating convo with dobby lines")
+            self.__audio_recorder.enqueue_speech_line(self.__current_response_phrase)
         if response == None or len(response.strip()) == 0:
-            self.__audio_recorder.stop_speaking()
+            self.__audio_recorder.stop_speaking() 
         if func == 2:
             self.__last_message = True
         if response != None and len(response) > 0 and response[-1] != "\n":
@@ -137,6 +138,7 @@ class Dobby:
                 self.get_robot_response(action["parameters"]["user_input"])
             else:
                 if self.__event_flag:
+                    print("heard nothing")
                     self.__event_flag = False
                     self.get_robot_response("") 
                 elif self.__agent.get_state() == "CONVERSING" and self.__hey_dobby_mode():
@@ -175,7 +177,14 @@ class Dobby:
                 and "dobby:" not in self.__current_response_phrase.lower()
             ):
                 self.__audio_recorder.enqueue_speech_line(self.__current_response_phrase)
+                
+            print(self.__current_response_phrase)
+            if "ROBOT:" not in self.__current_response_phrase:
+               self.cognitive_model.update_conversation(self.__current_response_phrase, True)
+
             self.__current_response_phrase = ""
+    
+        
 
     def __finished_speaking_callback(self):
         self.__enqueue_callback(self.__finished_speaking)

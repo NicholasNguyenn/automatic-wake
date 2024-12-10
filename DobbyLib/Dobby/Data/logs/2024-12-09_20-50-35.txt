@@ -1,0 +1,6 @@
+USER:Hey Dobby, how do I get to the Astro Museum?
+I'm afraid there's been a little mix up, we're at the University of Texas's Living With Robots Lab, not an Astro Museum. However, I can tell you about our Astro Robot. Would you like to check that out instead?
+USER:Hey Dobby, how do I get to the Astro Museum?
+Oh my, an Astro Museum? Afraid you've had a slight detour, this is a robotics lab. But fear not, we could hobble over to the Astro Robot. What say you?
+USER:Hey Dobby, how do I get to the Astro Museum?
+Ah, a mix-up in the matrix. We've got an Astro Robot here, not a museum. Fancy a visit to it instead?

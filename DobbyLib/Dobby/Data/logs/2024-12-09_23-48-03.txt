@@ -1,0 +1,2 @@
+USER:What are the drones like?
+Well, in the drone cage, we have a variety of UAVs (Unmanned Aerial Vehicles), different sizes, and models. They're used to study autonomous flight and ways robots can interact with the environment from the air. Would you like to start our tour there?

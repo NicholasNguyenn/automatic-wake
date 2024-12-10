@@ -10,10 +10,10 @@ class CognitiveModel:
     def __init__(self):
         self.audio = aud_proc.AudioProcessor()
         self.model = gpt.LLModel(model_key.gpt_key)
-        self.conversation = deque(maxlen=10)
+        self.conversation = deque(maxlen=15)
 
 
-    def decide_action(self, audio_recording="Dobby/Data/audio/input_audio"):
+    def decide_action(self, audio_recording="Dobby/Data/audio/input_audio.wav"):
         #AUDIO FILE MIGHT NEED ".wav" AT END NOT SURE CUZ I CAN'T RUN IT
 
         #If audio is empty there is no need to invoke models for processing
@@ -38,13 +38,12 @@ class CognitiveModel:
         for i in range(len(speaker_transcriptions)):
             self.update_conversation(speaker_transcriptions[i])
 
-        cur_convo = '\n'.join(self.conversation)
-        self.update_conversation(cur_convo)
-
         # Decide if we should respond given the conversation we've heard
-        response = self.model.appropriate_action(self.conversation)
+        
+        updated_convo = "\n".join(self.conversation)
+        response = self.model.appropriate_action(updated_convo)
+        
         action = json.loads(response)
-        #print(action["name"])
         return action
     
     def update_conversation(self, conversation_line, dobby=False):

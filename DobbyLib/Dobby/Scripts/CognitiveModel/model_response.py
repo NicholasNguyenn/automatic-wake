@@ -42,6 +42,7 @@ class LLModel:
     Robot Manipulator
     Social Navigation Hallway
     
+    You heard the conversation that follows these instructions. The latest and newest speech has been appended at the bototm of the conversation.
     Based on the conversation you overheard, you will call one of the provided functions.
 
     Choose only one function to invoke. Your response should only be a JSON object. Do not include any other text, formatting, or Markdown syntax (like triple backticks or language specifiers). The JSON object should look like this:

@@ -37,7 +37,7 @@ class Recorder:
     def __init__(self):
         self.frames = []
         self.audio = pyaudio.PyAudio()
-        self.talking_threshold = 40
+        self.talking_threshold = 20
         self.stop_recording_event = threading.Event()
         self.stop_speaking_event = threading.Event()
         self.speaking = False
@@ -128,7 +128,7 @@ class Recorder:
                         speaking = True
                         speech_detected = True
                         #set threshold halfway between silent and speaking 
-                        speaking_threshold = last_rms + (rms - last_rms) * 0.5
+                        speaking_threshold = last_rms + (rms - last_rms) * 0.2
                         print ("Started speaking " + str(speaking_threshold))
                         max_silent_chunks = max_silent_chunks_convo
                     silent_chunks = 0
@@ -210,6 +210,9 @@ class Recorder:
             if len(self.speech_line_queue) > 0:
                 self.generating_audio = True
                 text = self.speech_line_queue.pop(0)
+                
+                
+
                 match = pattern.search(text)
                 if match:
                     # an emotion was specified
