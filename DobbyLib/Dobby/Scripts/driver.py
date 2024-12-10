@@ -75,6 +75,7 @@ class Dobby:
         func, response = self.__agent.process_user_input(user_input)
         time.sleep(0.5)
         if len(self.__current_response_phrase) > 0:
+            self.cognitive_model.update_conversation(response, True)
             self.__audio_recorder.enqueue_speech_line(self.__current_response_phrase)
         self.__set_receiving_response(False)
         if response == None or len(response.strip()) == 0:
@@ -112,6 +113,10 @@ class Dobby:
             self.__is_recording = True
             if self.__recording_hook != None:
                 self.__recording_hook(True)
+            # If we've detected silence for a while clear the current conversation
+            # before continuing to record
+            if self.__audio_recorder.silent_cycles == 4:
+                self.cognitive_model.clear_conversation()
             self.__audio_recorder.start_recording(self.__recording_finished, self.__hey_dobby_mode())
             if self.__ui_enabled:
                 self.__ui.display_recording(True)

@@ -16,7 +16,6 @@ from functools import partial
 import math
 import re
 from collections import deque
-from Dobby.Scripts.CognitiveModel.cognitive_model import CognitiveModel
 
 # generate a dictionary file with http://www.speech.cs.cmu.edu/tools/lextool.html
 
@@ -44,6 +43,7 @@ class Recorder:
         self.speaking = False
         self.recieving_response = False
         self.recording = False
+        self.silent_cycles = 0
 
     def calibrate_microphone(self, threshold=2):
         print("Calibrating microphone for 5 chunks... Stay silent")
@@ -146,6 +146,7 @@ class Recorder:
         file_name = self.WAVE_OUTPUT_FILENAME + ".wav"
         
         if speech_detected:
+            self.silent_cycles = 0
             # Save recorded audio to file
             input_file_count += 1
             waveFile = wave.open(file_name, "wb")
@@ -169,6 +170,8 @@ class Recorder:
                     waveFile.setframerate(self.RATE)
                     waveFile.writeframes(b"".join(self.frames))  # Save empty WAV
                     waveFile.close()
+                else:
+                    self.silent_cycles +=1
 
         self.frames = []
 
