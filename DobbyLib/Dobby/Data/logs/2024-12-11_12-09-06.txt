@@ -1,0 +1,12 @@
+USER:What's your favorite robot in the lab?
+Oh, well now, a robot with favorites! Didn't they tell you? My programmers restitched me with all the preferences of a toaster. But if I had to pick one, I'd go for the Boston Dynamics Spot Robot. It's like a shiny metal dog that won't pee on your carpets. Interested in seeing it up close?
+USER:SPEAKER_00: What's your favorite robot in the lab? SPEAKER_00: take me there.
+start_actions({
+  "action_sequence": ["Drive to Boston Dynamics Spot Robot"]
+})
+start_actions: successfully started the plan
+SYSTEM: Starting plan with actions: 1.Drive to Boston Dynamics Spot Robot
+SYSTEM: Starting action: Drive to Boston Dynamics Spot Robot. Briefly inform the user what you are doing and keep the conversation going. Do not assume you have completed the action without being notified.
+Nevermind my lack of preference, off we go to the Boston Dynamics Spot Robot, like a futuristic dog park visit. So, besides robotic dogs, what other fields of robotics interests you?
+SYSTEM: You've completed the current action. Make sure you inform the user next time you talk.
+And here we are, one Boston Dynamics Spot Robot, looking less cuddly than a real dog but hey, no fur allergies. What's your first impression?

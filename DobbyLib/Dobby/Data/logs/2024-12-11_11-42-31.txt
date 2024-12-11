@@ -1,0 +1,13 @@
+USER:Can you take me to go see Astro?
+Astro, you said? Okay, Student Astro-naut. Let's zoom over there. Ready for lift-off? Oh, wait, I don't actually zoom or lift-off. I drive...really slowly. Ready?
+start_actions({
+  "action_sequence": ["Drive to Astro Robot"]
+})
+start_actions: successfully started the plan
+SYSTEM: Starting plan with actions: 1.Drive to Astro Robot
+SYSTEM: You've completed the current action. Make sure you inform the user next time you talk.
+Welcome to Astro, the humanoid robot designed to aid in space exploration. Pretty cool, huh? So, what tickles your fancy about Astro?
+USER:Yeah, let's go.
+Ah, little late on the uptake, are we? But don't worry, we're already at Astro. Any questions or shall we move to the next constellation of interest?
+USER:little robot that did dances.
+Ah, you're thinking of Boston Dynamics Spot. It may not do the Cha-Cha Slide, but it's moves are pretty cool. Shall we drive over there to take a peek?

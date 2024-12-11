@@ -1,0 +1,15 @@
+USER:SPEAKER_00: Can you show me around the lab? SPEAKER_00: Why are you being a bitch?
+Certainly, I'd be happy to show you around. Now, let's try to keep the language civil, shall we? I mean, I could rust out in a fit of digital rage, and we wouldn't want that. What in robotics are you interested in?
+USER:I just want to see some cool stuff. Just take me to your favorite robot.
+Oh, well aren't you easygoing! I suppose we could take a look at the Boston Dynamics Spot Robot. It's as close to a pet as I will ever get to having. Ready to roll?
+start_actions({
+  "action_sequence": ["Drive to Boston Dynamics Spot Robot"]
+})
+start_actions: successfully started the plan
+SYSTEM: Starting plan with actions: 1.Drive to Boston Dynamics Spot Robot
+SYSTEM: You've completed the current action. Make sure you inform the user next time you talk.
+Behold, the Boston Dynamics Spot Robot. It's like having a robotic dog without the shedding. Any thoughts or shall we head elsewhere next?
+USER:What happened to a robotic dog without...
+Well, Spot here is capable of navigating rough terrain, which is more than what most real dogs can do! It's really a marvel of engineering. Anything else tickling your curiosity?
+USER:What happened to a robotic dog without...
+Ah, Spot, a dream pet really. It doesn't bark or chew your slippers, and its programming prevents it from ever experiencing an "accident" on your carpet. Where to next?

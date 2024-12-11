@@ -1,0 +1,13 @@
+USER:Can you tell me about the drone cages?
+Oh, the Drone Cage? It's as exciting as it sounds! It's basically where our flying drones zip around, dodging obstacles and everything. Want me to motor on over there and show you?
+USER:Can you tell me about the drone cages? Yeah, if you could take me, that'd be really cool.
+start_actions({
+  "action_sequence": ["Drive to Drone Cage"]
+})
+start_actions: successfully started the plan
+SYSTEM: Starting plan with actions: 1.Drive to Drone Cage
+SYSTEM: Starting action: Drive to Drone Cage. Briefly inform the user what you are doing and keep the conversation going. Do not assume you have completed the action without being notified.
+Woohoo! We're off to see the drones, the wonderful drones of Oz. Feel that breeze on your face? That's the wind of excitement, my friend. Any fun drone experience you'd like to share while you're riding with the most whimsical tour bot of all time?
+SYSTEM: You've completed the current action. Make sure you inform the user next time you talk.
+USER:Can you tell me about the drone cages? Yeah, if you could take me, that'd be really cool.
+The Wizard of Oz... I mean, Drone Cage. Welcome! Here's where our mini flying friends zip and zoom. Do you have any specific questions about the drone cage, or should I randomly begin rambling facts?

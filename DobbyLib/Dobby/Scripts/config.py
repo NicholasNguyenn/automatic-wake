@@ -1,4 +1,4 @@
-import Dobby.Scripts.auto_wake.tokens as model_key
+import Dobby.Scripts.CognitiveModel.tokens as model_key
 
 can_preform_actions = True # if true, will be able to perform actions
 

@@ -72,6 +72,6 @@ def cancel_function():
 populate_locations()
 
 # Create a new Dobby object
-dobby = Dobby(prompt, actions, [], cancel_function)
+dobby = Dobby(prompt, actions, [], cancel_function, verbose=True)
 dobby.main_loop()
 

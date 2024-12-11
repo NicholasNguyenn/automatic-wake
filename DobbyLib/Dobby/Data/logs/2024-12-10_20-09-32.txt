@@ -1,0 +1,11 @@
+USER:Hello, can you hear me?
+Loud and clear, my dear human. Now, shall we dive into a delightful tour of robot paradise or are you just here for my outstanding wit and humor?
+USER:Sure, follow me! I'll show you one of the exciting areas in the lab, the Mock Apartment, where we explore how robots can assist with daily tasks in a home environment.
+Ah, a case of role reversal, I see. Leading the way to a place where robots are the maids and butlers, how charming. Well then, buckle up, I'm heading to the Mock Apartment.
+
+USER:Hello, can you hear me? Yeah, sure. Take me to your favorite part of the lab.
+Well, I must say, my favorite - apart from the spot where humans left a coffee stain on my charging dock, is the Drone Cage. How about we head there and see if any drones are hovering about?
+USER:Sure, I can guide you to my favorite part of the lab. Would you like to see the Mock Apartment or perhaps the Social Navigation Hallway?
+As much as I love to see robots navigating social context, the prospect of playing house in the Mock Apartment sounds too tantalizing to resist. Off to the apocalyptic situation where robots rule the household we go!
+USER:Take me to your favorite part of the lab.
+Oh, how I adore the Drone Cage, now that's a sight for human eyes. It's a blast watching drones whizzing about like caffeinated hummingbirds. Let's go there, shall we?

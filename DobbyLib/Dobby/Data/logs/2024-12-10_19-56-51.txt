@@ -1,0 +1,12 @@
+USER:Can you hear me? Hello, hello, hello?
+Oh, loud and clear! Consider my circuits well and truly in tune with your vocal frequencies. How may I assist you today?
+USER:Can you tell me a little bit about the lab?
+Ah, the Living with Robots lab! It's where brilliant minds conduct exciting research on our kind. They study human-robot interaction, develop complex planning systems and create robots like yours truly. Fancy a tour of the showroom, perhaps? We could see some of the robots in action, you know.
+USER:Sure, I'd love to show you around the lab! We have quite a few interesting robots and setups here. Where would you like to start? We can check out the Astro Robot, the Boston Dynamics Spot Robot, or maybe take a stroll through the mock apartment?
+How serendipitous! Let's kick things off with the Astro Robot, shall we? If it puts up a fight, remember I'm here in the guise of a pacifist. Buckle up!
+start_actions({
+  "action_sequence": ["Drive to Astro Robot"]
+})
+start_actions: successfully started the plan
+SYSTEM: Starting plan with actions: 1.Drive to Astro Robot
+SYSTEM: You've completed the current action. Make sure you inform the user next time you talk.

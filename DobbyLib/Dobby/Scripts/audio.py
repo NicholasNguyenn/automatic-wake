@@ -37,7 +37,7 @@ class Recorder:
     def __init__(self):
         self.frames = []
         self.audio = pyaudio.PyAudio()
-        self.talking_threshold = 20
+        self.talking_threshold = 40
         self.stop_recording_event = threading.Event()
         self.stop_speaking_event = threading.Event()
         self.speaking = False
@@ -74,6 +74,7 @@ class Recorder:
 
     def start_recording(self, finished_callback, auto_stop=False):
         # start recording thread
+        print("starting recording thread")
         self.recording = True
         self.stop_recording_event = threading.Event()
         self.record_thread = threading.Thread(
@@ -98,7 +99,7 @@ class Recorder:
         )
 
         max_silent_chunks = 12
-        max_silent_chunks_convo = 6
+        max_silent_chunks_convo = 3
         silent_chunks = 0
         last_rms = 0
         total_rms = 0
@@ -128,7 +129,7 @@ class Recorder:
                         speaking = True
                         speech_detected = True
                         #set threshold halfway between silent and speaking 
-                        speaking_threshold = last_rms + (rms - last_rms) * 0.2
+                        speaking_threshold = last_rms + (rms - last_rms) * 0.5
                         print ("Started speaking " + str(speaking_threshold))
                         max_silent_chunks = max_silent_chunks_convo
                     silent_chunks = 0
@@ -161,8 +162,10 @@ class Recorder:
         else:
             # Silence detected. If the current file is just silence we don't need 
             # to save another silent file
+            print("no speech detected")
             with wave.open(file_name, 'rb') as wave_file:
                 if wave_file.getnframes() != 0:
+                    print("saving silent file")
                     input_file_count += 1
                     waveFile = wave.open(file_name, "wb")
                     waveFile.setnchannels(self.CHANNELS)

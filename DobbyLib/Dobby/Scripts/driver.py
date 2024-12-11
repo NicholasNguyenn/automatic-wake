@@ -63,7 +63,7 @@ class Dobby:
         """interrupt idling and begin recording a user's input"""
         if not self.__is_recording:
             self.__audio_recorder.stop_recording()
-            self.__recording_tone.play()
+            #self.__recording_tone.play()
             self.__toggle_recording()
 
     def get_robot_response(self, user_input: str):
@@ -75,9 +75,11 @@ class Dobby:
         func, response = self.__agent.process_user_input(user_input)
         time.sleep(0.5)
         self.__set_receiving_response(False)
+        if response:
+            print("Updating convo with dobby lines")
+            self.cognitive_model.update_conversation(response, True)
 
         if len(self.__current_response_phrase) > 0:
-            print("Updating convo with dobby lines")
             self.__audio_recorder.enqueue_speech_line(self.__current_response_phrase)
         if response == None or len(response.strip()) == 0:
             self.__audio_recorder.stop_speaking() 
@@ -100,7 +102,8 @@ class Dobby:
     # use the loop we make to record audio and wait of the cognitive model to decide its time to interject
     # we will need to start a new theread and make a callback function
     def __begin_idling(self):
-        self.__toggle_recording()
+        print ("in begin_idling")
+        self.__enqueue_callback(self.__toggle_recording)
         self.log_console("Listening for Dobby...", True)
         if self.__idle_hook != None:
             self.__idle_hook()
@@ -116,7 +119,9 @@ class Dobby:
                 self.__recording_hook(True)
             # If we've detected silence for a while clear the current conversation
             # before continuing to record
+            print(f"silent cycles: {self.__audio_recorder.silent_cycles}")
             if self.__audio_recorder.silent_cycles == 4:
+                print("clearing conversation")
                 self.cognitive_model.clear_conversation()
             self.__audio_recorder.start_recording(self.__recording_finished, self.__hey_dobby_mode())
             if self.__ui_enabled:
@@ -130,22 +135,30 @@ class Dobby:
             if self.__ui_enabled:
                 self.__ui.display_recording(False)
                 self.__ui.enable_input(True)
-            self.__recording_tone.play()
+            # self.__recording_tone.play()
             if not respond:
                 return
             action = self.cognitive_model.decide_action()
+            print("in toggle recording")
             if action["name"] == 'get_robot_response':
+                print("if robot decided do nothign we shouldn't be here")
                 self.get_robot_response(action["parameters"]["user_input"])
             else:
+                print("robot decided do nothing")
                 if self.__event_flag:
                     print("heard nothing")
                     self.__event_flag = False
                     self.get_robot_response("") 
                 elif self.__agent.get_state() == "CONVERSING" and self.__hey_dobby_mode():
-                    self.__begin_idling()
+                    print("we're conversing aparently")
+                    # self.__begin_idling()
                 elif self.__agent.get_state() == "EXECUTING" and self.__hey_dobby_mode():
+                    print("we're executing apprently")
                     self.log_console("Listening for Dobby...", True)
-                    self.__begin_idling()
+                    # self.__begin_idling()
+                print("none of those conditions were true ig")
+                self.__begin_idling()
+                # print("should have gone to begin ")
 
     def __hey_dobby_mode(self):
         if self.__ui_enabled:
@@ -153,6 +166,7 @@ class Dobby:
         return True
 
     def __set_receiving_response(self, val):
+        print("in recieving response")
         if self.__is_recording and not val:
             self.__toggle_recording(False)
         if val and self.__ui_enabled:
@@ -169,6 +183,7 @@ class Dobby:
         self.__event_flag = True
 
     def __incoming_response(self, chunk):
+        print("in incoming_response")
         self.__current_response_phrase += chunk
         self.log_console(chunk, end="")
         if re.search(r"[a-zA-Z][.?!,;:\(\)\n]", self.__current_response_phrase):
@@ -178,9 +193,9 @@ class Dobby:
             ):
                 self.__audio_recorder.enqueue_speech_line(self.__current_response_phrase)
                 
-            print(self.__current_response_phrase)
-            if "ROBOT:" not in self.__current_response_phrase:
-               self.cognitive_model.update_conversation(self.__current_response_phrase, True)
+            # print(self.__current_response_phrase)
+            # if "ROBOT:" not in self.__current_response_phrase:
+            #    self.cognitive_model.update_conversation(self.__current_response_phrase, True)
 
             self.__current_response_phrase = ""
     
@@ -206,16 +221,23 @@ class Dobby:
         self.__callback_queue.put(callback)
 
     def __consume_callback(self):
+        # print("consuming callback")
         if self.__callback_queue.empty():
             return
         callback = self.__callback_queue.get(False)
         if self.__verbose:
             print(f"running {callback}")
+        print(f"consuming callback. running {callback}")
         callback()
 
     def main_loop(self):
         if self.__ui_enabled:
+            check = 0
             while not self.__ui.is_exit_clicked():
+                check +=1
+                if check == 100000:
+                    print("in main_loop")
+                    check = 0
                 self.__ui.update()
                 self.__consume_callback()
         else:

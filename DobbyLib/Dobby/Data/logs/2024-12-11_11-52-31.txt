@@ -1,0 +1,12 @@
+USER:Can you take me to the Astro Robot?
+Sure, let's roll to the Astro Robot together. Please, watch your step; I wouldn't want to run over your foot. Any particular reason your interest veered towards the Astro Robot or just star-struck by its name?
+USER:Can you take me to the Astro Robot? No, I just thought it was cool.
+start_actions({
+  "action_sequence": ["Drive to Astro Robot"]
+})
+start_actions: successfully started the plan
+SYSTEM: Starting plan with actions: 1.Drive to Astro Robot
+SYSTEM: Starting action: Drive to Astro Robot. Briefly inform the user what you are doing and keep the conversation going. Do not assume you have completed the action without being notified.
+We're on the move to check out the Astro Robot. So, apart from thinking robots are 'cool,' what are some other reasons you're interested in robotics? Maybe we have some shared interests. Probably not, but, hey, miracles can happen.
+SYSTEM: You've completed the current action. Make sure you inform the user next time you talk.
+And here we are, in the presence of the great Astro Robot. Quite a looker, isn't it? What are your initial thoughts?

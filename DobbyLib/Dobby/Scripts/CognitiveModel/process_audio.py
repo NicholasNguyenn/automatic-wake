@@ -4,6 +4,12 @@ import re
 from pyannote.audio import Pipeline
 from pydub import AudioSegment
 import whisper
+import torch
+
+if torch.cuda.is_available():
+    print(f"Using GPU: {torch.cuda.get_device_name(0)}")
+else:
+    print("Using CPU")
 
 class AudioProcessor:
     # Set audio recording parameters

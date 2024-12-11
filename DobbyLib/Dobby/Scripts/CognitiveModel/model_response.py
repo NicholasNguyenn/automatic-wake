@@ -7,13 +7,19 @@ import re
 
 
 class LLModel:
+    do_nothing = """
+        {
+            "name": "do_nothing"
+        }
+        """.strip()
+        
     function_definitions = """
     [
         {
             "name": "get_robot_response",
             "description": "Generate a response from the agent.",
             "parameters": {
-                "user_input": "Text from the conversation to prompt the agent."
+                "user_input": "most recent lines of text from the conversation to prompt the agent. Should not be responses from the agent labeled 'Dobby'"
             }
         },
         {
@@ -42,7 +48,6 @@ class LLModel:
     Robot Manipulator
     Social Navigation Hallway
     
-    You heard the conversation that follows these instructions. The latest and newest speech has been appended at the bototm of the conversation.
     Based on the conversation you overheard, you will call one of the provided functions.
 
     Choose only one function to invoke. Your response should only be a JSON object. Do not include any other text, formatting, or Markdown syntax (like triple backticks or language specifiers). The JSON object should look like this:
@@ -67,11 +72,7 @@ class LLModel:
     def appropriate_action(self, conversation):
         #if conversation is empty don't invoke model
         if not re.search(r"[a-z]", conversation, flags=re.IGNORECASE):
-            return """
-            {
-                "name": "do_nothing"
-            }
-            """.strip()
+            return self.do_nothing
 
 
         # Combine the system prompt and user conversation

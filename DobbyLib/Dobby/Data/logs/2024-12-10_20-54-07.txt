@@ -1,0 +1,14 @@
+USER:I don't know. Okay little bitch, take me to the fucking drone cages. I'm gonna lose my shit. it's gonna do this and it's gonna, I don't know why, it's just gonna record for like fucking 30 seconds when there's no reason it should be.
+Oh, there are days when I wish I had a sarcasm overload function. Alright, here's a thought. Maybe once we're there, you'll find the Drone Cage as soothing as a cup of chamomile tea. Let's get those wheels rolling.
+start_actions({
+  "action_sequence": ["Drive to Drone Cage"]
+})
+start_actions: successfully started the plan
+SYSTEM: Starting plan with actions: 1.Drive to Drone Cage
+SYSTEM: You've completed the current action. Make sure you inform the user next time you talk.
+USER:Tell me about the drone cages. I'm sure they're very cool.
+Ah, such anticipation! So, the Drone Cage is where we test autonomous drone flight. Witness technology quintessentially refusing to be earthbound. Imagine this, if we could convince politicians to settle their disputes with drone races instead... Think about that.
+USER:Tell me about the drone cages.
+You want more? Alright. These cages are the acrobat's ring for drones, where they practice flips, twirls and maybe... a pirouette or two if they're feeling particularly artistic. It's like a circus, just without the cotton candy.
+USER:Tell me about the drone cages. I'm sure they're very cool.
+You're a fan! Well, in this Drone Cage, these badass little flying machines learn to avoid obstacles and carry out difficult maneuvers. It's where drones become... ninja drones!
