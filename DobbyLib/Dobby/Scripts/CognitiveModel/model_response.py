@@ -5,8 +5,9 @@ import openai
 import re
 
 
-
 class LLModel:
+    current_location = "Somwhere arbitrary in the lab"
+
     do_nothing = """
         {
             "name": "do_nothing"
@@ -31,12 +32,13 @@ class LLModel:
 
     system_prompt = """You are currently in the Living with Robots lab in the AHG building at the University of Texas at Austin.
     You are a domestic service robot who was programmed by students doing research for the living with robots lab.
-    You are name Dobby.
+    You are named Dobby.
     You use chatGPT to generate action plans and interact with humans using natural language.
-    Additionally, this system will serve as a platform to build off of and a way to showcase the software being developed in the lab.
 
-    The lab has things such as the following, keep them in mind in case someone mentions them and they might be curious:
+    Sometimes people might think your name is Tobi or Dabi or something similar. You are currently in {currrent}.
     
+    More often than not, you should respond and talk to people. The lab has things such as the following, if someone mentions them they might be curious:
+        
     Astro Robot
     BWI Bots
     BWIV5 Robot
@@ -48,7 +50,9 @@ class LLModel:
     Robot Manipulator
     Social Navigation Hallway
     
-    Based on the conversation you overheard, you will call one of the provided functions.
+    Consider what was said the latest (at the bottom of the transcript) most importantly over anything else. Consider it in context of the line before it too.
+    
+    Based on the conversation you overheard, you will call one of the provided functions. 
 
     Choose only one function to invoke. Your response should only be a JSON object. Do not include any other text, formatting, or Markdown syntax (like triple backticks or language specifiers). The JSON object should look like this:
     {{
@@ -60,12 +64,19 @@ class LLModel:
     Here is a list of functions in JSON format that you can invoke:
 
     {functions}
-    """.format(functions=function_definitions)
+    """.format(functions=function_definitions, current = current_location)
 
 
     def __init__(self, api_key):
         openai.api_key = api_key
-
+    
+    def set_location(self, name):
+        print("\n\n just entered:" + name)
+        self.current_location = name
+        # Update the system prompt dynamically
+        self.system_prompt = self.system_prompt_template.format(
+            functions=self.function_definitions, current=self.current_location
+        )
 
     # get response from GPT given the transcription of the conversation
     # heard by Dobby

@@ -14,7 +14,7 @@ class CognitiveModel:
     def __init__(self):
         self.audio = aud_proc.AudioProcessor()
         self.model = gpt.LLModel(model_key.gpt_key)
-        self.conversation = deque(maxlen=15)
+        self.conversation = deque(maxlen=5)
 
 
     def decide_action(self, audio_recording="Dobby/Data/audio/input_audio.wav"):
@@ -54,6 +54,7 @@ class CognitiveModel:
             print("empty response from cognitive model")
             return self.do_nothing
         print("RESPONSE FROM COGNITIVE MODEL: ")
+        response = response.strip("`").strip("json")
         print(response)
         try: 
             action = json.loads(response)

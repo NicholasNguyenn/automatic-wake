@@ -1,5 +1,6 @@
 from Dobby import Dobby
 from Dobby import Action, Predicate
+import Dobby.Scripts.CognitiveModel.model_response as cognitive
 
 import yaml
 from functools import partial
@@ -8,6 +9,8 @@ import time
 ros_interface_on = False # Set to False if you are not using ROS (like at home computer)
 if ros_interface_on:
     import ros_interface
+    
+
 
 prompt = open("lab_tour_prompt.txt", "r").read()
 locations = {}
@@ -58,6 +61,8 @@ def create_goto_action(location_name):
 
 def goto_location(location_name):
     location = locations[location_name]
+    print("\n\n just entered:" + location_name)
+    cognitive.LLModel.set_location(location_name)
     ros_interface.go_to_pos(location[0], reached_goal=destination_reached)
 
 def destination_reached(result = None):
