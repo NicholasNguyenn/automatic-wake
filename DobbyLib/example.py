@@ -62,7 +62,7 @@ def create_goto_action(location_name):
 def goto_location(location_name):
     location = locations[location_name]
     print("\n\n just entered:" + location_name)
-    cognitive.LLModel.set_location(location_name)
+    dobby.cognitive_model.model.set_location(location_name)
     ros_interface.go_to_pos(location[0], reached_goal=destination_reached)
 
 def destination_reached(result = None):
